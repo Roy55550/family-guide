@@ -6,7 +6,7 @@ import { motion } from 'framer-motion'
 import { Button } from "@/components/button"
 import { Input } from "@/components/input"
 import { Textarea } from "@/components/textarea"
-import { Mail, Phone, ArrowRight, Menu } from 'lucide-react'
+import { Mail, Phone, ArrowRight, Menu } from 'lucide-react'  // Ensure lucide-react is installed
 import '../styles/globals.css' // Import Tailwind CSS
 
 const categories = [
