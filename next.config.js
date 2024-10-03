@@ -4,8 +4,18 @@ module.exports = {
   images: {
     unoptimized: true,
   },
-  webpack: (config, { isServer }) => {
-    config.resolve.fallback = { ...config.resolve.fallback, react: require.resolve('react') };
-    return config;
+  trailingSlash: true,
+  async headers() {
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          { 
+            key: 'Content-Security-Policy', 
+            value: "frame-src 'self' https://tally.so; script-src 'self' 'unsafe-inline' https://tally.so;" 
+          },
+        ],
+      },
+    ]
   },
 };
