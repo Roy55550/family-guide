@@ -4,8 +4,18 @@ module.exports = {
   images: {
     unoptimized: true,
   },
-  webpack: (config, { isServer }) => {
-    // Add any necessary webpack configurations here
-    return config
+  trailingSlash: true,
+  async headers() {
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          { 
+            key: 'Content-Security-Policy', 
+            value: "frame-src 'self' https://tally.so; script-src 'self' 'unsafe-inline' https://tally.so;" 
+          },
+        ],
+      },
+    ]
   },
 };
