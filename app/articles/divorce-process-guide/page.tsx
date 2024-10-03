@@ -67,7 +67,7 @@ export default function DivorceProcessGuide() {
   }
 
   return (
-    <div className="min-h-screen bg-[#FFE8D6] text-gray-800 font-sans">
+    <div className="min-h-screen bg-gray-50 text-gray-800 font-sans">
       <header className="bg-white shadow-sm sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <Link href="/" className="flex items-center">

@@ -1,11 +1,7 @@
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import { initializeApp, getApps, FirebaseApp } from "firebase/app";
+import { Analytics, getAnalytics, logEvent as firebaseLogEvent } from "firebase/analytics";
+import { Firestore, getFirestore, doc, setDoc } from 'firebase/firestore';
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyAohQfW1PmgfAx1nZVZMm8mVRJ9USZ2MYk",
   authDomain: "family-guide-7d87e.firebaseapp.com",
@@ -16,8 +12,35 @@ const firebaseConfig = {
   measurementId: "G-E6WDTK0XL1"
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+let app: FirebaseApp | undefined;
+let analytics: Analytics | undefined;
+let db: Firestore | undefined;
 
-export { app, analytics };
+function initFirebase() {
+  if (typeof window !== 'undefined' && !getApps().length) {
+    try {
+      app = initializeApp(firebaseConfig);
+      console.log("Firebase app initialized");
+      analytics = getAnalytics(app);
+      console.log("Firebase analytics initialized");
+      db = getFirestore(app);
+      console.log("Firestore initialized");
+    } catch (error) {
+      console.error("Error initializing Firebase:", error);
+    }
+  }
+}
+
+function getFirebaseComponents() {
+  if (!app) initFirebase();
+  return { 
+    app, 
+    db, 
+    analytics, 
+    logEvent: (analytics && firebaseLogEvent) || (() => {}), 
+    doc: db ? doc : (() => {}), 
+    setDoc: db ? setDoc : (() => Promise.resolve()) 
+  };
+}
+
+export default getFirebaseComponents;

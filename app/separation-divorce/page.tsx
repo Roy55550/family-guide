@@ -1,9 +1,11 @@
 "use client";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';  // Add this line
 import { motion } from 'framer-motion';
 import { User, MapPin, FileText, Users, Home, DollarSign, Scale, Clock } from 'lucide-react';
+import getFirebaseComponents from '../firebase';
 
 const questions = [
   {
@@ -101,16 +103,120 @@ interface Answers {
 }
 
 export default function SeparationDivorcePage() {
+  const router = useRouter();
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState<Answers>({});
+  const [userId, setUserId] = useState<string>('');
+  const [firebaseLoaded, setFirebaseLoaded] = useState(false);
+  const [firebaseComponents, setFirebaseComponents] = useState<any>(null);
+  const [quizSubmitted, setQuizSubmitted] = useState(false);
+  const [showThankYou, setShowThankYou] = useState(false);
 
-  const handleAnswer = (answer: string) => {
-    setAnswers(prevAnswers => ({ ...prevAnswers, [questions[currentQuestion].id]: answer }));
-    if (currentQuestion < questions.length - 1) {
-      setCurrentQuestion(currentQuestion + 1);
+  useEffect(() => {
+    console.log('useEffect called, currentQuestion:', currentQuestion);
+    setUserId(`user_${Date.now()}`);
+    const components = getFirebaseComponents();
+    setFirebaseComponents(components);
+    setFirebaseLoaded(true);
+
+    if (typeof window !== 'undefined') {
+      const handleBeforeUnload = () => {
+        if (currentQuestion > 0 && currentQuestion < questions.length - 1 && firebaseLoaded && components.analytics) {
+          try {
+            components.logEvent(components.analytics, 'quiz_dropoff', {
+              question_number: currentQuestion,
+              last_question: questions[currentQuestion].text
+            });
+            console.log('Quiz dropoff event logged');
+          } catch (error) {
+            console.error("Error logging quiz dropoff:", error);
+          }
+        }
+      };
+
+      window.addEventListener('beforeunload', handleBeforeUnload);
+
+      return () => {
+        window.removeEventListener('beforeunload', handleBeforeUnload);
+      };
+    }
+  }, [currentQuestion]);
+
+  const handleQuizSubmission = async () => {
+    console.log('Submitting quiz answers:', answers);
+    if (typeof window !== 'undefined' && firebaseLoaded && firebaseComponents) {
+      const { db, analytics, logEvent, doc, setDoc } = firebaseComponents;
+      if (db && analytics) {
+        try {
+          // Save all answers to Firestore
+          const userDocRef = doc(db, 'quiz_responses', userId);
+          await setDoc(userDocRef, answers, { merge: true });
+          console.log('All answers saved to Firestore');
+          
+          // Log quiz completion event
+          logEvent(analytics, 'quiz_completed', {
+            total_questions: questions.length,
+            user_id: userId
+          });
+          console.log('Quiz completion event logged to Analytics');
+          
+          setQuizSubmitted(true);
+          setShowThankYou(true);
+          
+          // Redirect to homepage after 3 seconds
+          setTimeout(() => {
+            router.push('/');
+          }, 3000);
+        } catch (error) {
+          console.error("Error submitting quiz:", error);
+        }
+      } else {
+        console.error('Firebase db or analytics not initialized');
+      }
     } else {
-      console.log('Quiz completed:', answers);
-      // Here you would typically send the answers to your backend or process them
+      console.error('Firebase not loaded or components not available');
+    }
+  };
+
+  const handleAnswer = async (answer: string) => {
+    console.log('handleAnswer called with:', answer);
+    setAnswers(prevAnswers => {
+      console.log('Previous answers:', prevAnswers);
+      return { ...prevAnswers, [questions[currentQuestion].id]: answer };
+    });
+    
+    if (typeof window !== 'undefined' && firebaseLoaded && firebaseComponents) {
+      const { db, analytics, logEvent, doc, setDoc } = firebaseComponents;
+      console.log('Firebase components:', { db, analytics, logEvent, doc, setDoc });
+      if (db && analytics) {
+        try {
+          const userDocRef = doc(db, 'quiz_responses', userId);
+          await setDoc(userDocRef, {
+            [questions[currentQuestion].id]: answer
+          }, { merge: true });
+          console.log('Answer saved to Firestore');
+          
+          logEvent(analytics, 'question_answered', {
+            question_number: currentQuestion + 1,
+            question_text: questions[currentQuestion].text,
+            answer: answer
+          });
+          console.log('Event logged to Analytics');
+        } catch (error) {
+          console.error("Error saving answer or logging event:", error);
+        }
+      } else {
+        console.error('Firebase db or analytics not initialized');
+      }
+    } else {
+      console.error('Firebase not loaded or components not available');
+    }
+
+    if (currentQuestion < questions.length - 1) {
+      setCurrentQuestion(prevQuestion => prevQuestion + 1);
+    } else {
+      // This is the last question
+      await handleQuizSubmission();
     }
   };
 
@@ -119,17 +225,23 @@ export default function SeparationDivorcePage() {
     setAnswers(prevAnswers => ({ ...prevAnswers, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (currentQuestion < questions.length - 1) {
-      setCurrentQuestion(currentQuestion + 1);
-    } else {
-      console.log('Quiz completed:', answers);
-      // Here you would typically send the answers to your backend or process them
-    }
+    
+    const formData = new FormData(e.currentTarget);
+    const currentAnswer: Answers = {};
+    
+    formData.forEach((value, key) => {
+      currentAnswer[key] = value.toString();
+    });
+    
+    setAnswers(prevAnswers => ({ ...prevAnswers, ...currentAnswer }));
+    
+    await handleQuizSubmission();
   };
 
   const renderQuestion = () => {
+    console.log('renderQuestion called, currentQuestion:', currentQuestion);
     const question = questions[currentQuestion];
     return (
       <motion.div
@@ -146,7 +258,7 @@ export default function SeparationDivorcePage() {
             <h1 className="text-2xl md:text-3xl font-bold mb-4 text-[#0F5C5B]">{question.title}</h1>
             <p className="mb-6 text-gray-600">{question.subtitle}</p>
             <button
-              onClick={() => setCurrentQuestion(currentQuestion + 1)}
+              onClick={() => handleAnswer('started')}
               className="bg-[#0F5C5B] text-white px-6 py-2 rounded-full hover:bg-[#0A4342] transition-colors"
             >
               {question.buttonText}
@@ -168,7 +280,11 @@ export default function SeparationDivorcePage() {
                 ))}
               </div>
             ) : question.type === 'input' ? (
-              <form onSubmit={handleSubmit} className="space-y-4">
+              <form onSubmit={(e) => {
+                e.preventDefault();
+                const input = e.currentTarget.querySelector('input');
+                if (input) handleAnswer(input.value);
+              }} className="space-y-4">
                 <input
                   type="text"
                   name={question.id}
@@ -230,8 +346,22 @@ export default function SeparationDivorcePage() {
     );
   };
 
+  console.log('Rendering component, currentQuestion:', currentQuestion);
+
+  if (showThankYou) {
+    return (
+      <div className="min-h-screen bg-gray-50 text-gray-800 font-sans flex items-center justify-center">
+        <div className="bg-white rounded-lg shadow-lg p-8 max-w-md text-center">
+          <h1 className="text-2xl font-bold mb-4 text-[#0F5C5B]">Thank You!</h1>
+          <p className="mb-4">We will be in touch shortly.</p>
+          <p className="text-sm text-gray-600">Redirecting to homepage...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="min-h-screen bg-[#FFE8D6] text-gray-800 font-sans">
+    <div className="min-h-screen bg-gray-50 text-gray-800 font-sans">
       <header className="bg-white shadow-sm py-4">
         <div className="container mx-auto px-4 flex items-center">
           <Link href="/" className="flex items-center">
@@ -248,7 +378,7 @@ export default function SeparationDivorcePage() {
       </header>
       
       <main className="container mx-auto px-4 py-8">
-        <div className="bg-[#FFE8D6] rounded-lg shadow-lg p-6 md:p-8 relative max-w-2xl mx-auto">
+        <div className="bg-white rounded-lg shadow-lg p-6 md:p-8 relative max-w-2xl mx-auto">
           <div className="border-t-4 border-[#0F5C5B] mb-6"></div>
           {renderQuestion()}
         </div>
