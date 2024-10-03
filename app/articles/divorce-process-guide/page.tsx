@@ -92,16 +92,15 @@ export default function DivorceProcessGuide() {
       </header>
 
       <main className="container mx-auto px-4 py-8 md:py-12">
-        <Button
-          variant="ghost"
-          className="mb-6 text-[#0F5C5B] hover:text-[#0A4342]"
-          asChild
-        >
-          <Link href="/articles">
+        <Link href="/articles">
+          <Button
+            variant="ghost"
+            className="mb-6 text-[#0F5C5B] hover:text-[#0A4342]"
+          >
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to Articles
-          </Link>
-        </Button>
+          </Button>
+        </Link>
 
         <article className="max-w-3xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
           <Image

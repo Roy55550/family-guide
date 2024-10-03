@@ -128,7 +128,7 @@ export default function HomePage() {
 
   const handleCategoryClick = (title: string) => {
     if (title === "Separation & Divorce") {
-      router.push('/separation-divorce');
+      router.push('/separation-divorce-main');
     }
   };
 
@@ -151,7 +151,7 @@ export default function HomePage() {
               {categories.map((category, index) => (
                 <li key={index}>
                   <Link 
-                    href={category.title === "Separation & Divorce" ? "/separation-divorce" : "#"}
+                    href={category.title === "Separation & Divorce" ? "/separation-divorce-main" : "#"}
                     className="text-gray-600 hover:text-[#0F5C5B] transition-colors"
                   >
                     {category.title}
@@ -199,7 +199,7 @@ export default function HomePage() {
                   whileTap={{ scale: 0.95 }}
                 >
                   <Link 
-                    href={category.title === "Separation & Divorce" ? "/separation-divorce" : "#"}
+                    href={category.title === "Separation & Divorce" ? "/separation-divorce-main" : "#"}
                     className="flex flex-col items-center group w-32 md:w-40"
                     onClick={() => handleCategoryClick(category.title)}
                   >
@@ -258,20 +258,22 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section className="py-12 md:py-20 bg-[#FFE8D6]">
+        <section className="py-16 md:py-24 bg-[#0F5C5B] text-white">
           <div className="container mx-auto px-4">
-            <h2 className="text-3xl md:text-4xl font-bold mb-8 md:mb-12 text-center text-[#0F5C5B]">Our Mission</h2>
-            <div className="bg-gradient-to-r from-[#0F5C5B] to-[#0A4342] rounded-lg shadow-xl p-6 md:p-12 max-w-4xl mx-auto text-white">
-              <p className="text-xl md:text-2xl mb-6 md:mb-8 leading-relaxed">
-                We empower individuals and families to build, sustain, and navigate healthy, happy relationships at every stage of life.
+            <div className="max-w-3xl mx-auto text-center">
+              <h2 className="text-3xl md:text-4xl font-bold mb-6">Our Mission</h2>
+              <p className="text-xl mb-8">
+                At Family Edition, we're dedicated to providing expert guidance and support for every stage of your relationship journey. From building strong foundations to navigating challenges, we're here to help you create lasting, fulfilling connections.
               </p>
-              <Button 
-                className="w-full md:w-auto bg-white text-[#0F5C5B] hover:bg-gray-100 transition-colors duration-300"
-                onClick={handleButtonClick}
-              >
-                Start Your Journey
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
+              <Link href="/about">
+                <Button 
+                  variant="ghost"
+                  className="bg-white text-[#0F5C5B] hover:bg-gray-100 hover:text-[#0A4342] px-6 py-3 rounded-full text-lg"
+                >
+                  Start Your Journey
+                  <ArrowRight className="ml-2 h-5 w-5 inline" />
+                </Button>
+              </Link>
             </div>
           </div>
         </section>
