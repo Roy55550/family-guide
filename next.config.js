@@ -5,7 +5,7 @@ module.exports = {
     unoptimized: true,
   },
   webpack: (config, { isServer }) => {
-    // Add any necessary webpack configurations here
-    return config
+    config.resolve.fallback = { ...config.resolve.fallback, react: require.resolve('react') };
+    return config;
   },
 };
