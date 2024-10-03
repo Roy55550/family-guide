@@ -3,9 +3,9 @@ import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
-import { Button } from "@/components/button"
-import { Input } from "@/components/input"
-import { Textarea } from "@/components/textarea"
+import { Button } from "./components/button"
+import { Input } from "./components/input"
+import { Textarea } from "./components/textarea"
 import { Mail, Phone, ArrowRight, Menu } from 'lucide-react'  // Ensure lucide-react is installed
 import '../styles/globals.css' // Import Tailwind CSS
 import { useRouter } from 'next/navigation';
@@ -69,29 +69,46 @@ const values = [
   { name: "Support", description: "We're here to help at every stage of your journey." },
 ]
 
+const mainArticle = {
+  title: "Understanding the Divorce Process: A Step-by-Step Guide",
+  description: "Navigate the complexities of divorce with our comprehensive guide, covering legal, emotional, and practical aspects of ending a marriage.",
+  link: "/articles/divorce-process-guide",
+  author: "Dr. Jennifer Smith",
+  authorImage: "https://i.pravatar.cc/100?img=12",
+  image: "https://images.unsplash.com/photo-1590012314607-cda9d9b699ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2341&q=80",
+}
+
 const articles = [
   {
-    title: "How to Build Strong Communication in Your Relationship",
-    author: "Emily Johnson",
-    authorImage: "https://i.pravatar.cc/100?img=1",
-    image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80",
-  },
-  {
-    title: "Navigating Financial Challenges as a Couple",
+    title: "Navigating Financial Challenges",
+    description: "Strategies for managing finances in relationships and families.",
+    link: "/articles/financial-challenges",
     author: "Michael Chen",
     authorImage: "https://i.pravatar.cc/100?img=3",
     image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80",
   },
   {
-    title: "Parenting Tips for New Parents",
+    title: "Effective Co-Parenting Strategies",
+    description: "Tips for successful co-parenting in various family situations.",
+    link: "/articles/co-parenting-strategies",
     author: "Sarah Thompson",
     authorImage: "https://i.pravatar.cc/100?img=5",
     image: "https://images.unsplash.com/photo-1531983412531-1f49a365ffed?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80",
   },
   {
-    title: "Coping Strategies for Divorce",
+    title: "Balancing Work and Family Life",
+    description: "Techniques for maintaining a healthy work-life balance.",
+    link: "/articles/work-life-balance",
     author: "Robert Williams",
     authorImage: "https://i.pravatar.cc/100?img=8",
+    image: "https://images.unsplash.com/photo-1590012314607-cda9d9b699ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2341&q=80",
+  },
+  {
+    title: "The Importance of Self-Care",
+    description: "Understanding why self-care is crucial for healthy relationships.",
+    link: "/articles/self-care-importance",
+    author: "Lisa Brown",
+    authorImage: "https://i.pravatar.cc/100?img=10",
     image: "https://images.unsplash.com/photo-1604881988758-f76ad2f7aac1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2342&q=80",
   },
 ]
@@ -195,28 +212,42 @@ export default function HomePage() {
         </section>
 
         <section className="py-12 md:py-20 bg-white">
-          <div className="container mx-auto px-4">
+          <div className="container mx-auto px-4 max-w-6xl">
             <h2 className="text-3xl md:text-4xl font-bold mb-8 md:mb-12 text-center text-[#0F5C5B]">Latest Articles</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-4xl mx-auto">
-              <div className="col-span-1 md:col-span-2">
-                <div className="bg-[#FFE8D6] rounded-lg overflow-hidden shadow-lg">
-                  <Image src="https://images.unsplash.com/photo-1590012314607-cda9d9b699ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2341&q=80" alt="Understanding the Divorce Process" width={800} height={400} className="w-full h-48 md:h-64 object-cover" />
-                  <div className="p-4 md:p-6">
-                    <h3 className="text-xl md:text-2xl font-bold mb-2 text-[#0F5C5B]">Understanding the Divorce Process: A Step-by-Step Guide</h3>
-                    <p className="text-gray-600 mb-4">Navigate the complexities of divorce with our comprehensive guide, covering legal, emotional, and practical aspects of ending a marriage.</p>
-                    <Link href="#" className="text-[#0F5C5B] hover:text-[#0A4342] font-semibold">Read More →</Link>
+            
+            {/* Main Article */}
+            <div className="mb-12">
+              <div className="bg-[#FFE8D6] rounded-lg overflow-hidden shadow-lg">
+                <Image src={mainArticle.image} alt={mainArticle.title} width={1200} height={600} className="w-full h-64 md:h-80 object-cover" />
+                <div className="p-6 md:p-8">
+                  <h3 className="text-2xl md:text-3xl font-bold mb-4 text-[#0F5C5B]">{mainArticle.title}</h3>
+                  <p className="text-gray-600 mb-4">{mainArticle.description}</p>
+                  <div className="flex items-center mb-4">
+                    <Image src={mainArticle.authorImage} alt={mainArticle.author} width={40} height={40} className="rounded-full mr-3" />
+                    <span className="text-sm text-gray-600">{mainArticle.author}</span>
                   </div>
+                  <Link href={mainArticle.link}>
+                    <Button className="w-full py-3 text-lg">Read More</Button>
+                  </Link>
                 </div>
               </div>
+            </div>
+
+            {/* Other Articles */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {articles.map((article, index) => (
                 <div key={index} className="bg-[#FFE8D6] rounded-lg overflow-hidden shadow-lg">
-                  <Image src={article.image} alt={article.title}  width={400} height={200} className="w-full h-40 md:h-48 object-cover" />
+                  <Image src={article.image} alt={article.title} width={400} height={200} className="w-full h-48 object-cover" />
                   <div className="p-4 md:p-6">
-                    <h3 className="text-lg md:text-xl font-bold mb-2 text-[#0F5C5B]">{article.title}</h3>
-                    <div className="flex items-center mt-4">
-                      <Image src={article.authorImage} alt={article.author} width={40} height={40} className="rounded-full mr-3" />
-                      <span className="text-sm text-gray-600">{article.author}</span>
+                    <h3 className="text-lg font-bold mb-2 text-[#0F5C5B]">{article.title}</h3>
+                    <p className="text-gray-600 mb-4 text-sm">{article.description}</p>
+                    <div className="flex items-center mb-4">
+                      <Image src={article.authorImage} alt={article.author} width={32} height={32} className="rounded-full mr-2" />
+                      <span className="text-xs text-gray-600">{article.author}</span>
                     </div>
+                    <Link href={article.link}>
+                      <Button className="w-full text-sm py-2">Read More</Button>
+                    </Link>
                   </div>
                 </div>
               ))}
