@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight, User, Calendar } from 'lucide-react'
-import { Button } from "@/components/button"
+import Button from '../components/button'
 
 const articles = [
   {

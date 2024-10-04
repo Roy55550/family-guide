@@ -3,7 +3,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
-import { Button } from "./components/button"
+import Button from "./components/button"
 import { Input } from "./components/input"
 import { Textarea } from "./components/textarea"
 import { Mail, Phone, ArrowRight, Menu } from 'lucide-react'  // Ensure lucide-react is installed

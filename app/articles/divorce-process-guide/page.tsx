@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowLeft, Calendar, Clock, User } from 'lucide-react'
-import { Button } from "../../components/button"
+import Button from '../../components/button'
 
 export default function DivorceProcessGuide() {
   const post = {
