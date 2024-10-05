@@ -7,6 +7,60 @@ import { collection, addDoc, Firestore } from 'firebase/firestore';
 import { logEvent, Analytics } from 'firebase/analytics';
 import Button from '../components/button';
 import Image from 'next/image';
+import Select from 'react-select';
+
+const usStates = [
+  { value: 'AL', label: 'Alabama' },
+  { value: 'AK', label: 'Alaska' },
+  { value: 'AZ', label: 'Arizona' },
+  { value: 'AR', label: 'Arkansas' },
+  { value: 'CA', label: 'California' },
+  { value: 'CO', label: 'Colorado' },
+  { value: 'CT', label: 'Connecticut' },
+  { value: 'DE', label: 'Delaware' },
+  { value: 'FL', label: 'Florida' },
+  { value: 'GA', label: 'Georgia' },
+  { value: 'HI', label: 'Hawaii' },
+  { value: 'ID', label: 'Idaho' },
+  { value: 'IL', label: 'Illinois' },
+  { value: 'IN', label: 'Indiana' },
+  { value: 'IA', label: 'Iowa' },
+  { value: 'KS', label: 'Kansas' },
+  { value: 'KY', label: 'Kentucky' },
+  { value: 'LA', label: 'Louisiana' },
+  { value: 'ME', label: 'Maine' },
+  { value: 'MD', label: 'Maryland' },
+  { value: 'MA', label: 'Massachusetts' },
+  { value: 'MI', label: 'Michigan' },
+  { value: 'MN', label: 'Minnesota' },
+  { value: 'MS', label: 'Mississippi' },
+  { value: 'MO', label: 'Missouri' },
+  { value: 'MT', label: 'Montana' },
+  { value: 'NE', label: 'Nebraska' },
+  { value: 'NV', label: 'Nevada' },
+  { value: 'NH', label: 'New Hampshire' },
+  { value: 'NJ', label: 'New Jersey' },
+  { value: 'NM', label: 'New Mexico' },
+  { value: 'NY', label: 'New York' },
+  { value: 'NC', label: 'North Carolina' },
+  { value: 'ND', label: 'North Dakota' },
+  { value: 'OH', label: 'Ohio' },
+  { value: 'OK', label: 'Oklahoma' },
+  { value: 'OR', label: 'Oregon' },
+  { value: 'PA', label: 'Pennsylvania' },
+  { value: 'RI', label: 'Rhode Island' },
+  { value: 'SC', label: 'South Carolina' },
+  { value: 'SD', label: 'South Dakota' },
+  { value: 'TN', label: 'Tennessee' },
+  { value: 'TX', label: 'Texas' },
+  { value: 'UT', label: 'Utah' },
+  { value: 'VT', label: 'Vermont' },
+  { value: 'VA', label: 'Virginia' },
+  { value: 'WA', label: 'Washington' },
+  { value: 'WV', label: 'West Virginia' },
+  { value: 'WI', label: 'Wisconsin' },
+  { value: 'WY', label: 'Wyoming' }
+];
 
 const questions = [
   {
@@ -23,8 +77,9 @@ const questions = [
   },
   {
     name: "Where are you located?",
-    content: "",
-    type: "text"
+    content: "Please select your state.",
+    type: "select",
+    options: usStates
   },
   {
     name: "How would you describe your current relationship with your spouse?",
@@ -93,6 +148,8 @@ const SeparationDivorcePage: React.FC = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
+  const [selectedState, setSelectedState] = useState<{ value: string; label: string } | null>(null);
+  const [showThankYouMessage, setShowThankYouMessage] = useState(false);
 
   useEffect(() => {
     const fireQuestionViewedEvent = async () => {
@@ -138,7 +195,12 @@ const SeparationDivorcePage: React.FC = () => {
         logEvent(analytics, 'separation_divorce_quiz_completed');
       }
 
-      router.push('/separation-divorce-results');
+      setShowThankYouMessage(true);
+      
+      // Redirect to homepage after 3 seconds
+      setTimeout(() => {
+        router.push('/');
+      }, 3000);
     } catch (error) {
       console.error('Error saving answers:', error);
     }
@@ -152,114 +214,180 @@ const SeparationDivorcePage: React.FC = () => {
 
   const isLastQuestion = currentQuestion === questions.length - 1;
 
+  const handleSelectChange = (selectedOption: any) => {
+    setSelectedState(selectedOption);
+    handleAnswer(selectedOption.label);
+  };
+
   return (
-    <div className="min-h-screen bg-[#F5F0E8] flex flex-col items-center justify-center p-4">
-      <div className="bg-white rounded-lg shadow-lg p-8 max-w-2xl w-full">
-        <div className="text-center mb-8">
+    <div className="min-h-screen bg-[#E5DFD6] flex flex-col items-center justify-center p-4">
+      {!showThankYouMessage && (
         <Image
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Family%20Edition%20logo-hhpVdqQJYG4AZwBjdYf2sqDVjmSnoY.jpeg"
-              alt="Family Edition Logo"
-              width={40}
-              height={40}
-              className="mr-2"
-            />
-          <h1 className="text-3xl font-bold text-[#0F5C5B] mb-4">
-            Help us match you with the right divorce support
-          </h1>
-          <p className="text-gray-600">
-            We're here to guide you through every step of your divorce journey. Answer a few quick
-            questions, and we'll match you with personalized services tailored to your needs.
-          </p>
-        </div>
-        
-        {!isLastQuestion ? (
+          src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Family%20Edition%20logo-hhpVdqQJYG4AZwBjdYf2sqDVjmSnoY.jpeg"
+          alt="Family Edition Logo"
+          width={120}
+          height={120}
+          className="mb-12"
+        />
+      )}
+      <div className="bg-white rounded-lg shadow-lg p-8 max-w-2xl w-full">
+        {showThankYouMessage ? (
+          <div className="text-center flex flex-col items-center justify-center h-64">
+            <h2 className="text-xl font-semibold mb-4 text-[#0F5C5B]">
+              Thank you, we will be in touch with your personal recommendation
+            </h2>
+            <p>Redirecting you to the homepage...</p>
+          </div>
+        ) : (
           <>
             <div className="mb-8">
-              <h2 className="text-xl font-semibold mb-2 text-[#0F5C5B]">{questions[currentQuestion].name}</h2>
-              <p className="text-gray-600 mb-4">{questions[currentQuestion].content}</p>
-              
-              {questions[currentQuestion].type === 'multiple' ? (
-                <div className="space-y-2">
-                  {questions[currentQuestion].options?.map((option, index) => (
-                    <button
-                      key={index}
-                      className={`w-full text-left p-3 border border-[#0F5C5B] rounded-lg transition-colors text-[#0F5C5B] ${
-                        answers[currentQuestion] === option ? 'bg-[#FFE8D6]' : 'hover:bg-[#FFE8D6]'
-                      }`}
-                      onClick={() => handleAnswer(option)}
-                    >
-                      {option}
-                    </button>
-                  ))}
-                </div>
-              ) : (
-                <input
-                  type="text"
-                  className="w-full p-3 border border-[#0F5C5B] rounded-lg text-[#0F5C5B]"
-                  placeholder="Type your answer here"
-                  value={answers[currentQuestion] || ''}
-                  onChange={(e) => setAnswers({ ...answers, [currentQuestion]: e.target.value })}
-                  onKeyPress={(e) => e.key === 'Enter' && handleAnswer(answers[currentQuestion] || '')}
-                />
-              )}
+              <div className="w-full bg-gray-200 rounded-full h-2.5 mb-4">
+                <div className="bg-[#0F5C5B] h-2.5 rounded-full" style={{width: `${((currentQuestion + 1) / questions.length) * 100}%`}}></div>
+              </div>
+              <h1 className="text-3xl font-bold text-[#0F5C5B] mb-4 text-center">
+                Help us match you with the right divorce support
+              </h1>
+              <p className="text-gray-600 text-center">
+                We're here to guide you through every step of your divorce journey. Answer a few quick
+                questions, and we'll match you with personalized services tailored to your needs.
+              </p>
             </div>
             
-            <div className="flex justify-between">
-              {currentQuestion > 0 && (
-                <Button onClick={handleBack} className="bg-gray-300 text-[#0F5C5B] px-6 py-2 rounded-lg">
-                  Back
-                </Button>
-              )}
-              {questions[currentQuestion].type === 'text' && (
-                <Button 
-                  onClick={() => handleAnswer(answers[currentQuestion] || '')} 
-                  className="bg-[#0F5C5B] text-white px-6 py-2 rounded-lg ml-auto"
-                >
-                  Next
-                </Button>
-              )}
-            </div>
+            {!isLastQuestion ? (
+              <>
+                <div className="mb-8">
+                  <h2 className="text-xl font-semibold mb-2 text-[#0F5C5B]">{questions[currentQuestion].name}</h2>
+                  <p className="text-gray-600 mb-4">{questions[currentQuestion].content}</p>
+                  
+                  {questions[currentQuestion].type === 'multiple' ? (
+                    <div className="space-y-2">
+                      {questions[currentQuestion].options?.map((option, index) => (
+                        <button
+                          key={index}
+                          className={`w-full text-left p-3 border border-[#0F5C5B] rounded-lg transition-colors text-[#0F5C5B] ${
+                            answers[currentQuestion] === option ? 'bg-[#FFE8D6]' : 'hover:bg-[#FFE8D6]'
+                          }`}
+                          onClick={() => handleAnswer(option)}
+                        >
+                          {option}
+                        </button>
+                      ))}
+                    </div>
+                  ) : questions[currentQuestion].type === 'select' ? (
+                    <Select
+                      options={questions[currentQuestion].options}
+                      onChange={handleSelectChange}
+                      value={selectedState}
+                      placeholder="Select your state"
+                      className="text-[#0F5C5B]"
+                      styles={{
+                        control: (provided) => ({
+                          ...provided,
+                          borderColor: '#0F5C5B',
+                          '&:hover': {
+                            borderColor: '#0F5C5B'
+                          }
+                        }),
+                        option: (provided, state) => ({
+                          ...provided,
+                          backgroundColor: state.isSelected ? '#FFE8D6' : 'white',
+                          color: '#0F5C5B',
+                          '&:hover': {
+                            backgroundColor: '#FFE8D6'
+                          }
+                        }),
+                        menu: (provided) => ({
+                          ...provided,
+                          maxHeight: '300px', // Increase the height of the dropdown
+                        }),
+                        menuList: (provided) => ({
+                          ...provided,
+                          maxHeight: '300px', // Increase the height of the scrollable area
+                        })
+                      }}
+                    />
+                  ) : (
+                    <input
+                      type="text"
+                      className="w-full p-3 border border-[#0F5C5B] rounded-lg text-[#0F5C5B]"
+                      placeholder="Type your answer here"
+                      value={answers[currentQuestion] || ''}
+                      onChange={(e) => setAnswers({ ...answers, [currentQuestion]: e.target.value })}
+                      onKeyPress={(e) => e.key === 'Enter' && handleAnswer(answers[currentQuestion] || '')}
+                    />
+                  )}
+                </div>
+                
+                <div className="flex justify-between">
+                  {currentQuestion > 0 && (
+                    <Button onClick={handleBack} className="bg-gray-300 text-[#0F5C5B] px-6 py-2 rounded-lg">
+                      Back
+                    </Button>
+                  )}
+                  {questions[currentQuestion].type === 'text' && (
+                    <Button 
+                      onClick={() => handleAnswer(answers[currentQuestion] || '')} 
+                      className="bg-[#0F5C5B] text-white px-6 py-2 rounded-lg ml-auto"
+                    >
+                      Next
+                    </Button>
+                  )}
+                </div>
+              </>
+            ) : (
+              <>
+                {showThankYouMessage ? (
+                  <div className="text-center">
+                    <h2 className="text-xl font-semibold mb-4 text-[#0F5C5B]">
+                      Thank you, we will be in touch with your personal recommendation
+                    </h2>
+                    <p>Redirecting you to the homepage...</p>
+                  </div>
+                ) : (
+                  <form onSubmit={handleSubmit} className="space-y-4">
+                    <h2 className="text-xl font-semibold mb-4 text-[#0F5C5B] text-center">
+                      Before we show your results, please provide your contact information:
+                    </h2>
+                    <input
+                      type="text"
+                      placeholder="Your Name"
+                      className="w-full p-3 border border-[#0F5C5B] rounded-lg"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      required
+                    />
+                    <input
+                      type="email"
+                      placeholder="Your Email"
+                      className="w-full p-3 border border-[#0F5C5B] rounded-lg"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                    />
+                    <input
+                      type="tel"
+                      placeholder="Your Phone Number (optional)"
+                      className="w-full p-3 border border-[#0F5C5B] rounded-lg"
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
+                    />
+                    <p className="text-sm text-gray-600">
+                      By clicking submit, I agree to receive emails from Family Edition
+                    </p>
+                    <div className="flex justify-between">
+                      <Button onClick={handleBack} className="bg-gray-300 text-[#0F5C5B] px-6 py-2 rounded-lg">
+                        Back
+                      </Button>
+                      <button type="submit" className="bg-[#0F5C5B] text-white px-6 py-2 rounded-lg">
+                        Submit
+                      </button>
+                    </div>
+                  </form>
+                )}
+              </>
+            )}
           </>
-        ) : (
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <h2 className="text-xl font-semibold mb-4 text-[#0F5C5B] text-center">
-              Before we show your results, please provide your contact information:
-            </h2>
-            <input
-              type="text"
-              placeholder="Your Name"
-              className="w-full p-3 border border-[#0F5C5B] rounded-lg"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-            />
-            <input
-              type="email"
-              placeholder="Your Email"
-              className="w-full p-3 border border-[#0F5C5B] rounded-lg"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-            <input
-              type="tel"
-              placeholder="Your Phone Number (optional)"
-              className="w-full p-3 border border-[#0F5C5B] rounded-lg"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-            />
-            <p className="text-sm text-gray-600">
-              By clicking submit, I agree to receive emails from Family Edition
-            </p>
-            <button type="submit" className="w-full bg-[#0F5C5B] text-white py-3 rounded-lg">
-              Submit
-            </button>
-          </form>
         )}
-        
-        <div className="mt-8 text-center text-sm text-gray-500">
-          Question {currentQuestion + 1} of {questions.length}
-        </div>
       </div>
     </div>
   );
