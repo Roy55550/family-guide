@@ -11,7 +11,7 @@ import Image from 'next/image';
 const questions = [
   {
     name: "Where are you in your relationship or divorce journey?",
-    content: "Let us know your current status so we can recommend the right support for you.",
+    content: "",
     type: "multiple",
     options: [
       "Married, considering divorce",
@@ -23,7 +23,7 @@ const questions = [
   },
   {
     name: "Where are you located?",
-    content: "Please provide your state of residence for location-based recommendations.",
+    content: "",
     type: "text"
   },
   {
@@ -156,13 +156,13 @@ const SeparationDivorcePage: React.FC = () => {
     <div className="min-h-screen bg-[#F5F0E8] flex flex-col items-center justify-center p-4">
       <div className="bg-white rounded-lg shadow-lg p-8 max-w-2xl w-full">
         <div className="text-center mb-8">
-          <Image
-            src="/logo.png"
-            alt="Family Edition Logo"
-            width={80}
-            height={80}
-            className="mx-auto mb-4"
-          />
+        <Image
+              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Family%20Edition%20logo-hhpVdqQJYG4AZwBjdYf2sqDVjmSnoY.jpeg"
+              alt="Family Edition Logo"
+              width={40}
+              height={40}
+              className="mr-2"
+            />
           <h1 className="text-3xl font-bold text-[#0F5C5B] mb-4">
             Help us match you with the right divorce support
           </h1>
