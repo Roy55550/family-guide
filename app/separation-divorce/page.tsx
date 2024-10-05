@@ -165,8 +165,9 @@ const SeparationDivorcePage: React.FC = () => {
     fireQuestionViewedEvent();
   }, [currentQuestion]);
 
-  const handleAnswer = async (answer: string) => {
-    const newAnswers = { ...answers, [currentQuestion]: answer };
+  const handleAnswer = async (answer: string | { value: string; label: string }) => {
+    const answerValue = typeof answer === 'string' ? answer : answer.label;
+    const newAnswers = { ...answers, [currentQuestion]: answerValue };
     setAnswers(newAnswers);
 
     const analytics = await getAnalytics;
@@ -174,7 +175,7 @@ const SeparationDivorcePage: React.FC = () => {
       logEvent(analytics, 'question_answered', {
         question_number: currentQuestion + 1,
         question_text: questions[currentQuestion].name,
-        answer: answer
+        answer: answerValue
       });
     }
 
@@ -261,7 +262,7 @@ const SeparationDivorcePage: React.FC = () => {
                   
                   {questions[currentQuestion].type === 'multiple' ? (
                     <div className="space-y-2">
-                      {questions[currentQuestion].options?.map((option, index) => (
+                      {(questions[currentQuestion].options as string[]).map((option, index) => (
                         <button
                           key={index}
                           className={`w-full text-left p-3 border border-[#0F5C5B] rounded-lg transition-colors text-[#0F5C5B] ${
@@ -275,7 +276,7 @@ const SeparationDivorcePage: React.FC = () => {
                     </div>
                   ) : questions[currentQuestion].type === 'select' ? (
                     <Select
-                      options={questions[currentQuestion].options}
+                      options={questions[currentQuestion].options as { value: string; label: string }[]}
                       onChange={handleSelectChange}
                       value={selectedState}
                       placeholder="Select your state"
