@@ -1,12 +1,12 @@
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyAohQfW1PmgfAx1nZVZMm8mVRJ9USZ2MYk",
-  authDomain: "family-guide-7d87e.firebaseapp.com",
-  projectId: "family-guide-7d87e",
-  storageBucket: "family-guide-7d87e.appspot.com",
-  messagingSenderId: "722177267915",
-  appId: "1:722177267915:web:70645b3b6e7272467de34e",
-  measurementId: "G-E6WDTK0XL1"
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+  measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
 };
 
 export default firebaseConfig;

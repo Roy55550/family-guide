@@ -183,7 +183,9 @@ const SeparationDivorcePage: React.FC = () => {
                   {questions[currentQuestion].options?.map((option, index) => (
                     <button
                       key={index}
-                      className="w-full text-left p-3 border border-[#0F5C5B] rounded-lg hover:bg-[#FFE8D6] transition-colors text-[#0F5C5B]"
+                      className={`w-full text-left p-3 border border-[#0F5C5B] rounded-lg transition-colors text-[#0F5C5B] ${
+                        answers[currentQuestion] === option ? 'bg-[#FFE8D6]' : 'hover:bg-[#FFE8D6]'
+                      }`}
                       onClick={() => handleAnswer(option)}
                     >
                       {option}
@@ -206,6 +208,14 @@ const SeparationDivorcePage: React.FC = () => {
               {currentQuestion > 0 && (
                 <Button onClick={handleBack} className="bg-gray-300 text-[#0F5C5B] px-6 py-2 rounded-lg">
                   Back
+                </Button>
+              )}
+              {questions[currentQuestion].type === 'text' && (
+                <Button 
+                  onClick={() => handleAnswer(answers[currentQuestion] || '')} 
+                  className="bg-[#0F5C5B] text-white px-6 py-2 rounded-lg ml-auto"
+                >
+                  Next
                 </Button>
               )}
             </div>
