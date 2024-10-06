@@ -248,10 +248,12 @@ const SeparationDivorcePage: React.FC = () => {
               <h1 className="text-3xl font-bold text-[#0F5C5B] mb-4 text-center">
                 Help us match you with the right divorce support
               </h1>
-              <p className="text-gray-600 text-center">
-                We're here to guide you through every step of your divorce journey. Answer a few quick
-                questions, and we'll match you with personalized services tailored to your needs.
-              </p>
+              {currentQuestion === 0 && (
+                <p className="text-gray-600 text-center">
+                  We're here to guide you through every step of your divorce journey. Answer a few quick
+                  questions, and we'll match you with personalized services tailored to your needs.
+                </p>
+              )}
             </div>
             
             {!isLastQuestion ? (
@@ -281,6 +283,7 @@ const SeparationDivorcePage: React.FC = () => {
                       value={selectedState}
                       placeholder="Select your state"
                       className="text-[#0F5C5B]"
+                      menuPlacement="auto"
                       styles={{
                         control: (provided) => ({
                           ...provided,
@@ -299,11 +302,12 @@ const SeparationDivorcePage: React.FC = () => {
                         }),
                         menu: (provided) => ({
                           ...provided,
-                          maxHeight: '300px', // Increase the height of the dropdown
+                          maxHeight: '300px',
+                          marginTop: '-150px', // This pulls the menu up
                         }),
                         menuList: (provided) => ({
                           ...provided,
-                          maxHeight: '300px', // Increase the height of the scrollable area
+                          maxHeight: '300px',
                         })
                       }}
                     />
