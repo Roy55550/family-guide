@@ -1,74 +1,87 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { ArrowRight, User, Calendar, Shield, Award, ThumbsUp, Heart, Scale, DollarSign, Home, Users, CreditCard } from 'lucide-react'
+import { ArrowRight, User, Calendar, Shield, Award, ThumbsUp, Heart, Home, Users, DollarSign, Gift, Clipboard } from 'lucide-react'
 import Button from '../components/button'
 import { playfair } from '../fonts'
 
 const subcategories = [
   {
-    title: "Emotional Support",
-    description: "Connect with compassionate therapists to help you navigate emotional challenges.",
-    icon: Heart,
-  },
-  {
-    title: "Divorce Lawyers and Mediators",
-    description: "Find expert legal guidance for a fair and smooth process.",
-    icon: Scale,
-  },
-  {
-    title: "Financial Support",
-    description: "Plan for a stable future with experienced financial advisors.",
-    icon: DollarSign,
-  },
-  {
-    title: "Real Estate and Property Division",
-    description: "Navigate property division with professional support.",
+    title: "Venue Selection",
+    description: "Find the perfect location for your dream wedding ceremony and reception.",
     icon: Home,
   },
   {
-    title: "Child Custody and Co-Parenting",
-    description: "Get expert help to protect your children's interests and well-being.",
+    title: "Guest List Management",
+    description: "Organize and manage your guest list efficiently for a smooth wedding day.",
     icon: Users,
   },
   {
-    title: "Financing Options",
-    description: "Explore loans and other financing solutions to support your divorce process.",
-    icon: CreditCard,
+    title: "Budget Planning",
+    description: "Create and stick to a realistic wedding budget that fits your needs.",
+    icon: DollarSign,
+  },
+  {
+    title: "Wedding Planning Services",
+    description: "Connect with professional wedding planners to bring your vision to life.",
+    icon: Clipboard,
+  },
+  {
+    title: "Officiants",
+    description: "Find the right officiant to perform your wedding ceremony.",
+    icon: Heart,
+  },
+  {
+    title: "Marriage Counseling",
+    description: "Prepare for a strong marriage with pre-wedding counseling services.",
+    icon: Users,
+  },
+  {
+    title: "Retirement Planning",
+    description: "Start planning your financial future together with expert advice.",
+    icon: DollarSign,
+  },
+  {
+    title: "Prenuptial Agreements",
+    description: "Learn about and create prenuptial agreements to protect both partners.",
+    icon: Shield,
   },
 ]
 
 const articles = [
   {
-    title: "How to Choose Between a Divorce Lawyer and Mediator",
-    excerpt: "Understand the key differences and decide which option is best for your situation.",
-    author: "Sarah Thompson",
-    date: "July 15, 2023",
-    image: "https://images.unsplash.com/photo-1590012314607-cda9d9b699ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2341&q=80",
+    title: "Top 6 Reasons to Get Marriage Counseling",
+    excerpt: "Discover why marriage counseling can be beneficial for couples at any stage of their relationship.",
+    author: "Dr. Emily Carter",
+    date: "September 1, 2023",
+    image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80",
+    link: "/articles/getting-married/top-6-reasons-to-get-marriage-counseling",
   },
   {
-    title: "Managing Your Finances During a Divorce",
-    excerpt: "Essential tips for protecting your financial future and navigating the complexities of asset division.",
+    title: "10 Tips for Choosing Your Perfect Wedding Venue",
+    excerpt: "Discover key factors to consider when selecting the ideal location for your special day.",
+    author: "Emma Johnson",
+    date: "July 15, 2023",
+    image: "https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80",
+    link: "#",
+  },
+  {
+    title: "Creating a Wedding Budget That Works for You",
+    excerpt: "Learn how to allocate your funds wisely and plan a beautiful wedding within your means.",
     author: "Michael Chen",
     date: "August 2, 2023",
-    image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80",
-  },
-  {
-    title: "Tips for Co-Parenting After Separation",
-    excerpt: "Learn effective strategies for maintaining a healthy co-parenting relationship and ensuring your children's well-being.",
-    author: "Emily Johnson",
-    date: "August 10, 2023",
-    image: "https://images.unsplash.com/photo-1543342384-1f1350e27861?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80",
+    image: "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80",
+    link: "#",
   },
 ]
 
-export default function SeparationAndDivorcePage() {
+export default function GettingMarriedPage() {
   return (
     <div className="min-h-screen bg-[#FFE8D6] text-gray-800 font-sans">
       <header className="bg-white shadow-sm sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <Link href="/" className="flex items-center">
             <Image
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Family%20Edition%20logo-hhpVdqQJYG4AZwBjdYf2sqDVjmSnoY.jpeg"
+              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Family Edition logo-hhpVdqQJYG4AZwBjdYf2sqDVjmSnoY.jpeg"
               alt="Family Edition Logo"
               width={40}
               height={40}
@@ -92,13 +105,13 @@ export default function SeparationAndDivorcePage() {
         <section className="bg-[#0F5C5B] text-white py-16 md:py-24">
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto text-center">
-              <h1 className={`${playfair.className} text-4xl md:text-5xl font-bold mb-6`}>Get Expert Guidance Through Your Divorce Process</h1>
-              <p className="text-xl mb-8">Find the right professionals for legal, financial, and emotional support, customized to your unique situation.</p>
-              <Link href="/separation-divorce">
+              <h1 className={`${playfair.className} text-4xl md:text-5xl font-bold mb-6`}>Plan Your Perfect Wedding and Marriage</h1>
+              <p className="text-xl mb-8">Get expert guidance and resources for every aspect of your wedding planning and marriage preparation.</p>
+              <Link href="/wedding-planning-quiz">
                 <Button 
                   className="bg-white text-[#0F5C5B] hover:bg-gray-100 hover:text-[#0A4342] px-8 py-4 rounded-full text-lg font-bold"
                 >
-                  Start Your Divorce Support Quiz
+                  Start Your Wedding Planning Quiz
                   <ArrowRight className="ml-2 h-5 w-5 inline" />
                 </Button>
               </Link>
@@ -106,10 +119,10 @@ export default function SeparationAndDivorcePage() {
           </div>
         </section>
 
-        {/* Featured Content Section - Moved up */}
+        {/* Featured Content Section */}
         <section className="py-16 bg-white">
           <div className="container mx-auto px-4">
-            <h2 className={`${playfair.className} text-3xl md:text-4xl font-bold mb-12 text-center text-[#0F5C5B]`}>Resources to Help You Navigate Divorce</h2>
+            <h2 className={`${playfair.className} text-3xl md:text-4xl font-bold mb-12 text-center text-[#0F5C5B]`}>Resources for Planning Your Wedding and Marriage</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {articles.map((article, index) => (
                 <div key={index} className="bg-[#FFE8D6] rounded-lg shadow-lg overflow-hidden">
@@ -117,20 +130,25 @@ export default function SeparationAndDivorcePage() {
                   <div className="p-6">
                     <h3 className="text-xl font-bold mb-2 text-[#0F5C5B]">{article.title}</h3>
                     <p className="text-gray-600 mb-4">{article.excerpt}</p>
-                    <div className="flex items-center text-sm text-gray-500">
+                    <div className="flex items-center text-sm text-gray-500 mb-4">
                       <User className="mr-2 h-4 w-4" />
                       <span className="mr-4">{article.author}</span>
                       <Calendar className="mr-2 h-4 w-4" />
                       <span>{article.date}</span>
                     </div>
+                    <Link href={article.link}>
+                      <Button className="w-full bg-[#0F5C5B] text-white hover:bg-[#0A4342] transition-colors duration-300 rounded-full py-2 px-4">
+                        Read More
+                      </Button>
+                    </Link>
                   </div>
                 </div>
               ))}
             </div>
             <div className="text-center mt-12">
-              <Link href="/divorce-resources">
+              <Link href="/wedding-planning-articles">
                 <Button className="bg-[#0F5C5B] text-white hover:bg-[#0A4342] px-8 py-4 rounded-full text-lg font-bold">
-                  Explore More Divorce Resources
+                  Explore More Wedding Planning Resources
                   <ArrowRight className="ml-2 h-5 w-5 inline" />
                 </Button>
               </Link>
@@ -141,9 +159,9 @@ export default function SeparationAndDivorcePage() {
         {/* Introduction & Trust-Building Section */}
         <section className="py-16 bg-[#FFE8D6]">
           <div className="container mx-auto px-4">
-            <h2 className={`${playfair.className} text-3xl md:text-4xl font-bold mb-6 text-center text-[#0F5C5B]`}>We're Here to Help at Every Stage of the Divorce Process</h2>
+            <h2 className={`${playfair.className} text-3xl md:text-4xl font-bold mb-6 text-center text-[#0F5C5B]`}>We're Here to Support Your Journey to Marriage</h2>
             <p className="text-lg text-center mb-8 max-w-3xl mx-auto">
-              Divorce is complex. We're here to guide you every step of the way, connecting you with trusted professionals who understand your needs.
+              Planning a wedding and preparing for marriage can be overwhelming. We're here to guide you every step of the way, connecting you with trusted professionals and resources.
             </p>
             <div className="flex justify-center space-x-8 mb-8">
               <div className="flex flex-col items-center">
@@ -165,7 +183,7 @@ export default function SeparationAndDivorcePage() {
         {/* Subcategories Section */}
         <section className="py-16 bg-white">
           <div className="container mx-auto px-4">
-            <h2 className={`${playfair.className} text-3xl md:text-4xl font-bold mb-12 text-center text-[#0F5C5B]`}>Find the Right Support for Every Aspect of Your Divorce</h2>
+            <h2 className={`${playfair.className} text-3xl md:text-4xl font-bold mb-12 text-center text-[#0F5C5B]`}>Find the Right Support for Every Aspect of Your Wedding and Marriage</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {subcategories.map((category, index) => (
                 <div key={index} className="bg-white rounded-lg shadow-md p-6 text-center transition-all duration-300 hover:shadow-lg border border-gray-200">
@@ -174,7 +192,7 @@ export default function SeparationAndDivorcePage() {
                   </div>
                   <h3 className={`${playfair.className} text-xl font-bold mb-2 text-[#0F5C5B]`}>{category.title}</h3>
                   <p className="text-gray-600 mb-4">{category.description}</p>
-                  <Link href="/separation-divorce">
+                  <Link href="/wedding-planning-quiz">
                     <Button className="w-full bg-[#0F5C5B] text-white hover:bg-[#0A4342] transition-colors duration-300 rounded-full py-2 px-4">
                       Explore Options
                     </Button>
@@ -191,7 +209,7 @@ export default function SeparationAndDivorcePage() {
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="mb-4 md:mb-0">
               <h3 className="text-xl font-bold">Family Edition</h3>
-              <p className="text-sm">Empowering relationships at every stage of life.</p>
+              <p className="text-sm">Empowering couples at every stage of their journey.</p>
             </div>
             <nav>
               <ul className="flex space-x-4">

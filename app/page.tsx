@@ -10,31 +10,13 @@ import { Mail, Phone, ArrowRight, Menu } from 'lucide-react'  // Ensure lucide-r
 import '../styles/globals.css' // Import Tailwind CSS
 import { useRouter } from 'next/navigation';
 import dynamic from 'next/dynamic';
+import { playfair } from './fonts'
 
 const SeparationDivorcePage = dynamic(() => import('./separation-divorce/page'), { ssr: false });
 
 const categories = [
   {
-    title: "Building Your Relationship",
-    icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#FF6B6B" className="w-8 h-8 md:w-10 md:h-10">
-        <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" />
-      </svg>
-    ),
-    color: "bg-red-100"
-  },
-  {
-    title: "Living Together",
-    icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#4ECDC4" className="w-8 h-8 md:w-10 md:h-10">
-        <path d="M11.47 3.84a.75.75 0 011.06 0l8.69 8.69a.75.75 0 101.06-1.06l-8.689-8.69a2.25 2.25 0 00-3.182 0l-8.69 8.69a.75.75 0 001.061 1.06l8.69-8.69z" />
-        <path d="M12 5.432l8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 01-.75-.75v-4.5a.75.75 0 00-.75-.75h-3a.75.75 0 00-.75.75V21a.75.75 0 01-.75.75H5.625a1.875 1.875 0 01-1.875-1.875v-6.198a2.29 2.29 0 00.091-.086L12 5.43z" />
-      </svg>
-    ),
-    color: "bg-teal-100"
-  },
-  {
-    title: "Marriage & Partnership",
+    title: "Getting Married",
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#45B7D1" className="w-8 h-8 md:w-10 md:h-10">
         <path fillRule="evenodd" d="M8.25 6.75a3.75 3.75 0 117.5 0 3.75 3.75 0 01-7.5 0zM12 12.75a3 3 0 100-6 3 3 0 000 6z" clipRule="evenodd" />
@@ -44,7 +26,7 @@ const categories = [
     color: "bg-blue-100"
   },
   {
-    title: "Family & Parenthood",
+    title: "Journey into Parenthood",  // Updated title
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#FFD93D" className="w-8 h-8 md:w-10 md:h-10">
         <path fillRule="evenodd" d="M8.25 6.75a3.75 3.75 0 117.5 0 3.75 3.75 0 01-7.5 0zM15.75 9.75a3 3 0 116 0 3 3 0 01-6 0zM2.25 9.75a3 3 0 116 0 3 3 0 01-6 0zM6.31 15.117A6.745 6.745 0 0112 12a6.745 6.745 0 016.709 7.498.75.75 0 01-.372.568A12.696 12.696 0 0112 21.75c-2.305 0-4.47-.612-6.337-1.684a.75.75 0 01-.372-.568 6.787 6.787 0 011.019-4.38z" clipRule="evenodd" />
@@ -54,7 +36,7 @@ const categories = [
     color: "bg-yellow-100"
   },
   {
-    title: "Separation & Divorce",
+    title: "Getting Divorced",
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#A364D9" className="w-8 h-8 md:w-10 md:h-10">
         <path fillRule="evenodd" d="M19.5 21a3 3 0 003-3V9a3 3 0 00-3-3h-5.379a.75.75 0 01-.53-.22L11.47 3.66A2.25 2.25 0 009.879 3H4.5a3 3 0 00-3 3v12a3 3 0 003 3h15zm-6.75-10.5a.75.75 0 00-1.5 0v4.19l-1.72-1.72a.75.75 0 00-1.06 1.06l3 3a.75.75 0 001.06 0l3-3a.75.75 0 10-1.06-1.06l-1.72 1.72V10.5z" clipRule="evenodd" />
@@ -127,8 +109,12 @@ export default function HomePage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const handleCategoryClick = (title: string) => {
-    if (title === "Separation & Divorce") {
+    if (title === "Getting Divorced") {
       router.push('/separation-divorce-main');
+    } else if (title === "Getting Married") {
+      router.push('/getting-married');
+    } else if (title === "Journey into Parenthood") {  // Updated condition
+      router.push('/journey-into-parenthood');  // Updated route
     }
   };
 
@@ -151,8 +137,13 @@ export default function HomePage() {
               {categories.map((category, index) => (
                 <li key={index}>
                   <Link 
-                    href={category.title === "Separation & Divorce" ? "/separation-divorce-main" : "#"}
-                    className="text-gray-600 hover:text-[#0F5C5B] transition-colors"
+                    href={
+                      category.title === "Getting Divorced" ? "/separation-divorce-main" : 
+                      category.title === "Getting Married" ? "/getting-married" :
+                      category.title === "Journey into Parenthood" ? "/journey-into-parenthood" : "#"  // Updated condition and route
+                    }
+                    className="flex flex-col items-center group w-32 md:w-40"
+                    onClick={() => handleCategoryClick(category.title)}
                   >
                     {category.title}
                   </Link>
@@ -185,7 +176,7 @@ export default function HomePage() {
       <main>
         <section className="py-12 md:py-20 bg-gradient-to-r from-[#FFE8D6] to-[#FFD6BA]">
           <div className="container mx-auto px-4">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 md:mb-8 text-center text-[#0F5C5B] leading-tight">
+            <h1 className="text-4xl md:text-5xl font-bold mb-8 md:mb-12 text-center text-[#0F5C5B]">
               Navigate Life&apos;s Relationships<br className="hidden md:inline" />with Expert Guidance
             </h1>
             <p className="text-lg md:text-2xl text-center mb-8 md:mb-12 text-gray-600 max-w-3xl mx-auto">
@@ -199,7 +190,11 @@ export default function HomePage() {
                   whileTap={{ scale: 0.95 }}
                 >
                   <Link 
-                    href={category.title === "Separation & Divorce" ? "/separation-divorce-main" : "#"}
+                    href={
+                      category.title === "Getting Divorced" ? "/separation-divorce-main" : 
+                      category.title === "Getting Married" ? "/getting-married" :
+                      category.title === "Journey into Parenthood" ? "/journey-into-parenthood" : "#"  // Updated condition and route
+                    }
                     className="flex flex-col items-center group w-32 md:w-40"
                     onClick={() => handleCategoryClick(category.title)}
                   >
@@ -265,117 +260,10 @@ export default function HomePage() {
               <p className="text-xl mb-8">
                 At Family Edition, we're dedicated to providing expert guidance and support for every stage of your relationship journey. From building strong foundations to navigating challenges, we're here to help you create lasting, fulfilling connections.
               </p>
-              <Link href="/about">
-                <Button 
-                  variant="ghost"
-                  className="bg-white text-[#0F5C5B] hover:bg-gray-100 hover:text-[#0A4342] px-6 py-3 rounded-full text-lg"
-                >
-                  Start Your Journey
-                  <ArrowRight className="ml-2 h-5 w-5 inline" />
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </section>
-
-        <section className="py-12 md:py-20 bg-white">
-          <div className="container mx-auto px-4">
-            <h2 className="text-3xl md:text-4xl font-bold mb-8 md:mb-12 text-center text-[#0F5C5B]">Our Values</h2>
-            <div className="flex flex-wrap justify-center gap-3 md:gap-4 mb-8 md:mb-12">
-              {values.map((value, index) => (
-                <motion.button
-                  key={index}
-                  className={`px-4 md:px-6 py-2 md:py-3 rounded-full text-sm md:text-lg font-semibold transition-colors duration-300 ${
-                    activeValue.name === value.name
-                      ? 'bg-[#0F5C5B] text-white'
-                      : 'bg-[#FFE8D6] text-[#0F5C5B] hover:bg-[#FFD6BA]'
-                  }`}
-                  onClick={() => setActiveValue(value)}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  {value.name}
-                </motion.button>
-              ))}
-            </div>
-            <motion.div
-              key={activeValue.name}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3 }}
-              className="text-center max-w-2xl mx-auto"
-            >
-              <p className="text-lg md:text-xl text-gray-600">{activeValue.description}</p>
-            </motion.div>
-          </div>
-        </section>
-
-        <section className="py-12 md:py-20 bg-[#FFE8D6]">
-          <div className="container mx-auto px-4">
-            <h2 className="text-3xl md:text-4xl font-bold mb-8 md:mb-12 text-center text-[#0F5C5B]">Contact Us</h2>
-            <div className="max-w-2xl mx-auto bg-white rounded-lg shadow-xl p-6 md:p-8">
-              <form className="space-y-4 md:space-y-6">
-                <div className="flex flex-col md:flex-row gap-4">
-                  <Input placeholder="Your Name" className="flex-1" />
-                  <Input type="email" placeholder="Your Email" className="flex-1" />
-                </div>
-                <Textarea placeholder="Your Message" className="min-h-[120px] md:min-h-[150px]" />
-                <div className="flex justify-center">
-                  <Button 
-                    className="w-full md:w-auto bg-[#0F5C5B] text-white hover:bg-[#0A4342] transition-colors duration-300"
-                    onClick={handleButtonClick}
-                  >
-                    Send Message
-                    <ArrowRight className="ml-2 h-5 w-5" />
-                  </Button>
-                </div>
-              </form>
-              <div className="mt-8 md:mt-12 flex flex-col md:flex-row justify-center gap-4 md:gap-8">
-                <div className="flex items-center justify-center">
-                  <Mail className="h-5 w-5 md:h-6 md:w-6 text-[#0F5C5B] mr-2" />
-                  <span className="text-sm md:text-base">contact@familyedition.com</span>
-                </div>
-                <div className="flex items-center justify-center">
-                  <Phone className="h-5 w-5 md:h-6 md:w-6 text-[#0F5C5B] mr-2" />
-                  <span className="text-sm md:text-base">+1 (555) 123-4567</span>
-                </div>
-              </div>
             </div>
           </div>
         </section>
       </main>
-
-      <footer className="bg-[#0F5C5B] text-white py-8 md:py-12">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div>
-              <h3 className="text-xl md:text-2xl font-bold mb-4">Family Edition</h3>
-              <p className="text-sm md:text-base text-gray-300">Empowering relationships at every stage of life.</p>
-            </div>
-            <div>
-              <h4 className="text-lg md:text-xl font-semibold mb-4">Quick Links</h4>
-              <ul className="space-y-2">
-                {categories.map((category, index) => (
-                  <li key={index}>
-                    <Link href="#" className="text-sm md:text-base text-gray-300 hover:text-white transition-colors">
-                      {category.title}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <h4 className="text-lg md:text-xl font-semibold mb-4">Connect With Us</h4>
-              <div className="flex space-x-4">
-                {/* Add social media icons here */}
-              </div>
-            </div>
-          </div>
-          <div className="mt-8 pt-8 border-t border-gray-700 text-center text-xs md:text-sm text-gray-300">
-            &copy; 2023 Family Edition. All rights reserved.
-          </div>
-        </div>
-      </footer>
     </div>
   )
 }

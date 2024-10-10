@@ -8,6 +8,7 @@ import { logEvent, Analytics } from 'firebase/analytics';
 import Button from '../components/button';
 import Image from 'next/image';
 import Select from 'react-select';
+import { playfair, inter } from '../fonts'
 
 const usStates = [
   { value: 'AL', label: 'Alabama' },
@@ -234,7 +235,7 @@ const SeparationDivorcePage: React.FC = () => {
       <div className="bg-white rounded-lg shadow-lg p-8 max-w-2xl w-full">
         {showThankYouMessage ? (
           <div className="text-center flex flex-col items-center justify-center h-64">
-            <h2 className="text-xl font-semibold mb-4 text-[#0F5C5B]">
+            <h2 className={`${playfair.className} text-xl font-semibold mb-4 text-[#0F5C5B]`}>
               Thank you, we will be in touch with your personal recommendation
             </h2>
             <p>Redirecting you to the homepage...</p>
@@ -245,7 +246,7 @@ const SeparationDivorcePage: React.FC = () => {
               <div className="w-full bg-gray-200 rounded-full h-2.5 mb-4">
                 <div className="bg-[#0F5C5B] h-2.5 rounded-full" style={{width: `${((currentQuestion + 1) / questions.length) * 100}%`}}></div>
               </div>
-              <h1 className="text-3xl font-bold text-[#0F5C5B] mb-4 text-center">
+              <h1 className={`${playfair.className} text-4xl font-bold text-[#0F5C5B] mb-4 text-center`}>
                 Help us match you with the right divorce support
               </h1>
               {currentQuestion === 0 && (
@@ -259,7 +260,7 @@ const SeparationDivorcePage: React.FC = () => {
             {!isLastQuestion ? (
               <>
                 <div className="mb-8">
-                  <h2 className="text-xl font-semibold mb-2 text-[#0F5C5B]">{questions[currentQuestion].name}</h2>
+                  <h2 className={`${playfair.className} text-xl font-semibold mb-2 text-[#0F5C5B]`}>{questions[currentQuestion].name}</h2>
                   <p className="text-gray-600 mb-4">{questions[currentQuestion].content}</p>
                   
                   {questions[currentQuestion].type === 'multiple' ? (
@@ -343,14 +344,14 @@ const SeparationDivorcePage: React.FC = () => {
               <>
                 {showThankYouMessage ? (
                   <div className="text-center">
-                    <h2 className="text-xl font-semibold mb-4 text-[#0F5C5B]">
+                    <h2 className={`${playfair.className} text-xl font-semibold mb-4 text-[#0F5C5B]`}>
                       Thank you, we will be in touch with your personal recommendation
                     </h2>
                     <p>Redirecting you to the homepage...</p>
                   </div>
                 ) : (
                   <form onSubmit={handleSubmit} className="space-y-4">
-                    <h2 className="text-xl font-semibold mb-4 text-[#0F5C5B] text-center">
+                    <h2 className={`${playfair.className} text-xl font-semibold mb-4 text-[#0F5C5B] text-center`}>
                       Before we show your results, please provide your contact information:
                     </h2>
                     <input
