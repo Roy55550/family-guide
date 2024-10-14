@@ -1,9 +1,11 @@
+import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { ArrowLeft, Calendar, Clock, User } from 'lucide-react'
+import { ArrowLeft, Calendar, Clock, User, ArrowRight } from 'lucide-react'
 import Button from '../../components/button'
+import { playfair } from '../../fonts'
 
-export default function DivorceProcessGuide() {
+const DivorceProcessGuidePage: React.FC = () => {
   const post = {
     title: "Understanding the Divorce Process: A Step-by-Step Guide",
     author: "Dr. Jennifer Smith",
@@ -132,8 +134,9 @@ export default function DivorceProcessGuide() {
             />
             <div className="mt-8 mb-6">
               <Link href="/separation-divorce">
-                <Button className="w-full py-3 text-lg rounded-full">
-                  Want to better understand your options? Start here
+                <Button className="w-full bg-[#0F5C5B] text-white hover:bg-[#0A4342] px-8 py-4 rounded-full text-lg font-bold transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl">
+                  Want to better understand your divorce options? Start here
+                  <ArrowRight className="ml-2 h-5 w-5 inline animate-pulse" />
                 </Button>
               </Link>
             </div>
@@ -174,3 +177,5 @@ export default function DivorceProcessGuide() {
     </div>
   )
 }
+
+export default DivorceProcessGuidePage

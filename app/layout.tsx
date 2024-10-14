@@ -9,6 +9,9 @@ export const metadata: Metadata = {
     index: false,
     follow: false,
   },
+  other: {
+    'impact-site-verification': '09fbd5e4-51ad-4569-ae9f-ab6389f20130'
+  }
 };
 
 export default function RootLayout({
@@ -18,6 +21,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={inter.className}>
+      <head>
+        <meta name='impact-site-verification' content='09fbd5e4-51ad-4569-ae9f-ab6389f20130' />
+      </head>
       <body>
         {children}
       </body>

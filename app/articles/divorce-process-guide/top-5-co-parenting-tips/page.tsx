@@ -1,10 +1,10 @@
 import React from 'react';
-import HowToNavigateDivorceSmoothlyArticle from '../how-to-navigate-divorce-smoothly';
+import Top5CoParentingTipsArticle from '../top-5-co-parenting-tips';
 
 const ArticlePage: React.FC = () => {
   return (
     <div className="min-h-screen bg-[#FFE8D6] py-8">
-      <HowToNavigateDivorceSmoothlyArticle />
+      <Top5CoParentingTipsArticle />
     </div>
   );
 };

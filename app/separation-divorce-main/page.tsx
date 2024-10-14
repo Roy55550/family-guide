@@ -1,14 +1,18 @@
+"use client";  // Add this line at the top of the file
+
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight, User, Calendar, Shield, Award, ThumbsUp, Heart, Scale, DollarSign, Home, Users, CreditCard } from 'lucide-react'
 import Button from '../components/button'
 import { playfair } from '../fonts'
+import { useState } from 'react'
 
 const subcategories = [
   {
     title: "Emotional Support",
     description: "Connect with compassionate therapists to help you navigate emotional challenges.",
     icon: Heart,
+    link: "/separation-divorce-main/best-couple-therapy"
   },
   {
     title: "Divorce Lawyers and Mediators",
@@ -39,11 +43,12 @@ const subcategories = [
 
 const articles = [
   {
-    title: "How to Choose Between a Divorce Lawyer and Mediator",
-    excerpt: "Understand the key differences and decide which option is best for your situation.",
-    author: "Sarah Thompson",
-    date: "July 15, 2023",
-    image: "https://images.unsplash.com/photo-1590012314607-cda9d9b699ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2341&q=80",
+    title: "Top 5 Co-Parenting Tips",
+    excerpt: "Learn effective strategies for successful co-parenting and ensuring your children's well-being after divorce.",
+    author: "Family Edition Team",
+    date: "June 20, 2023",
+    image: "/images/Top 5 co parenting tips/top 5 image1.jpg",
+    link: "/articles/divorce-process-guide/top-5-co-parenting-tips"
   },
   {
     title: "Managing Your Finances During a Divorce",
@@ -53,15 +58,18 @@ const articles = [
     image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80",
   },
   {
-    title: "Tips for Co-Parenting After Separation",
-    excerpt: "Learn effective strategies for maintaining a healthy co-parenting relationship and ensuring your children's well-being.",
-    author: "Emily Johnson",
-    date: "August 10, 2023",
-    image: "https://images.unsplash.com/photo-1543342384-1f1350e27861?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80",
+    title: "Understanding the Divorce Process: A Step-by-Step Guide",
+    excerpt: "Navigate the complexities of divorce with our comprehensive guide, covering legal, emotional, and practical aspects of ending a marriage.",
+    author: "Dr. Jennifer Smith",
+    date: "June 15, 2023",
+    image: "https://images.unsplash.com/photo-1590012314607-cda9d9b699ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2341&q=80",
+    link: "/articles/divorce-process-guide"
   },
 ]
 
 export default function SeparationAndDivorcePage() {
+  const [imageFallback, setImageFallback] = useState({});
+
   return (
     <div className="min-h-screen bg-[#FFE8D6] text-gray-800 font-sans">
       <header className="bg-white shadow-sm sticky top-0 z-50">
@@ -106,32 +114,52 @@ export default function SeparationAndDivorcePage() {
           </div>
         </section>
 
-        {/* Featured Content Section - Moved up */}
+        {/* Featured Content Section */}
         <section className="py-16 bg-white">
           <div className="container mx-auto px-4">
             <h2 className={`${playfair.className} text-3xl md:text-4xl font-bold mb-12 text-center text-[#0F5C5B]`}>Resources to Help You Navigate Divorce</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {articles.map((article, index) => (
                 <div key={index} className="bg-[#FFE8D6] rounded-lg shadow-lg overflow-hidden">
-                  <Image src={article.image} alt={article.title} width={400} height={200} className="w-full h-48 object-cover" />
+                  <div className="relative w-full h-48">
+                    <Image 
+                      src={imageFallback[index] || article.image}
+                      alt={article.title}
+                      layout="fill"
+                      objectFit="cover"
+                      onError={() => {
+                        setImageFallback(prev => ({
+                          ...prev,
+                          [index]: "/images/placeholder.jpg" // Replace with your placeholder image path
+                        }));
+                      }}
+                    />
+                  </div>
                   <div className="p-6">
                     <h3 className="text-xl font-bold mb-2 text-[#0F5C5B]">{article.title}</h3>
                     <p className="text-gray-600 mb-4">{article.excerpt}</p>
-                    <div className="flex items-center text-sm text-gray-500">
+                    <div className="flex items-center text-sm text-gray-500 mb-4">
                       <User className="mr-2 h-4 w-4" />
                       <span className="mr-4">{article.author}</span>
                       <Calendar className="mr-2 h-4 w-4" />
                       <span>{article.date}</span>
                     </div>
+                    {article.link && (
+                      <Link href={article.link}>
+                        <Button className="w-full bg-[#0F5C5B] text-white hover:bg-[#0A4342] transition-colors duration-300 rounded-full py-2 px-4">
+                          Read More
+                        </Button>
+                      </Link>
+                    )}
                   </div>
                 </div>
               ))}
             </div>
             <div className="text-center mt-12">
-              <Link href="/divorce-resources">
-                <Button className="bg-[#0F5C5B] text-white hover:bg-[#0A4342] px-8 py-4 rounded-full text-lg font-bold">
-                  Explore More Divorce Resources
-                  <ArrowRight className="ml-2 h-5 w-5 inline" />
+              <Link href="/separation-divorce">
+                <Button className="bg-[#0F5C5B] text-white hover:bg-[#0A4342] px-8 py-4 rounded-full text-lg font-bold transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl">
+                  Want to better understand your divorce options?
+                  <ArrowRight className="ml-2 h-5 w-5 inline animate-pulse" />
                 </Button>
               </Link>
             </div>
@@ -174,7 +202,7 @@ export default function SeparationAndDivorcePage() {
                   </div>
                   <h3 className={`${playfair.className} text-xl font-bold mb-2 text-[#0F5C5B]`}>{category.title}</h3>
                   <p className="text-gray-600 mb-4">{category.description}</p>
-                  <Link href="/separation-divorce">
+                  <Link href={category.link || "/separation-divorce"}>
                     <Button className="w-full bg-[#0F5C5B] text-white hover:bg-[#0A4342] transition-colors duration-300 rounded-full py-2 px-4">
                       Explore Options
                     </Button>

@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { playfair } from '../../fonts';
-import { ChevronDown, ChevronUp, ArrowLeft } from 'lucide-react';
+import { ArrowLeft, User, Clock, ChevronDown, ChevronUp } from 'lucide-react';
 
 interface FAQItem {
   question: string;
@@ -69,7 +69,7 @@ const Top6ReasonsToGetMarriageCounselingArticle: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-[#FFE8D6]">
+    <div className="min-h-screen bg-gray-100">
       <div className="container mx-auto px-4 py-8">
         <div className="max-w-3xl mx-auto">
           <Link href="/getting-married" className="inline-flex items-center text-[#0F5C5B] hover:underline mb-6">
@@ -77,8 +77,6 @@ const Top6ReasonsToGetMarriageCounselingArticle: React.FC = () => {
           </Link>
           
           <article className="bg-white rounded-lg shadow-lg p-8">
-            <h1 className={`${playfair.className} text-4xl font-bold mb-6 text-[#0F5C5B]`}>Top 6 Reasons to Get Marriage Counseling</h1>
-            
             <Image 
               src="/images/6-reasons-article/image1.jpg" 
               alt="A cozy, inviting counseling room with soft lighting, a comfortable couch, and a warm atmosphere."
@@ -86,6 +84,16 @@ const Top6ReasonsToGetMarriageCounselingArticle: React.FC = () => {
               height={400}
               className="rounded-lg mb-6"
             />
+
+            <h1 className={`${playfair.className} text-4xl font-bold mb-4 text-[#0F5C5B]`}>Top 6 Reasons to Get Marriage Counseling</h1>
+            
+            <div className="flex items-center text-sm text-gray-600 mb-6">
+              <User className="mr-2 h-4 w-4" />
+              <span className="mr-4">Dr. Jennifer Smith</span>
+              <Clock className="mr-2 h-4 w-4" />
+              <span className="mr-4">June 15, 2023</span>
+              <span>10 min read</span>
+            </div>
 
             <p className="mb-6 italic">Marriage counseling provides a safe space for building stronger emotional bonds and enhances communication skills, fostering healthier connections. Couples benefit from unbiased perspectives, reliable support, conflict resolution, confidentiality, and a commitment to relationship growth.</p>
 
