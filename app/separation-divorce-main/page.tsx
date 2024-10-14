@@ -68,7 +68,7 @@ const articles = [
 ]
 
 export default function SeparationAndDivorcePage() {
-  const [imageFallback, setImageFallback] = useState({});
+  const [imageFallback, setImageFallback] = useState<string[]>([]);
 
   return (
     <div className="min-h-screen bg-[#FFE8D6] text-gray-800 font-sans">
@@ -128,10 +128,11 @@ export default function SeparationAndDivorcePage() {
                       layout="fill"
                       objectFit="cover"
                       onError={() => {
-                        setImageFallback(prev => ({
-                          ...prev,
-                          [index]: "/images/placeholder.jpg" // Replace with your placeholder image path
-                        }));
+                        setImageFallback(prev => {
+                          const newFallback = [...prev];
+                          newFallback[index] = "/images/placeholder.jpg"; // Replace with your placeholder image path
+                          return newFallback;
+                        });
                       }}
                     />
                   </div>
