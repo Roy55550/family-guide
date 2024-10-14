@@ -5,6 +5,10 @@ import { inter } from './fonts';
 export const metadata: Metadata = {
   title: "Family Edition",
   description: "Navigate Life's Relationships with Expert Guidance",
+  robots: {
+    index: false,
+    follow: false,
+  },
 };
 
 export default function RootLayout({
