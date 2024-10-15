@@ -51,19 +51,20 @@ const articles = [
     link: "/articles/divorce-process-guide/top-5-co-parenting-tips"
   },
   {
-    title: "Managing Your Finances During a Divorce",
-    excerpt: "Essential tips for protecting your financial future and navigating the complexities of asset division.",
-    author: "Michael Chen",
-    date: "August 2, 2023",
-    image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80",
-  },
-  {
     title: "Understanding the Divorce Process: A Step-by-Step Guide",
     excerpt: "Navigate the complexities of divorce with our comprehensive guide, covering legal, emotional, and practical aspects of ending a marriage.",
     author: "Dr. Jennifer Smith",
     date: "June 15, 2023",
     image: "https://images.unsplash.com/photo-1590012314607-cda9d9b699ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2341&q=80",
     link: "/articles/divorce-process-guide"
+  },
+  {
+    title: "How to Access Financial Help for Divorce",
+    excerpt: "Learn essential steps for securing financial assistance during divorce, from early preparation to engaging professional guidance and planning for future expenses.",
+    author: "Family Edition Team",
+    date: "June 20, 2023",
+    image: "/images/How to Access Financial Help for Divorce/image1.jpg",
+    link: "/articles/divorce-process-guide/how-to-access-financial-help-for-divorce"
   },
 ]
 

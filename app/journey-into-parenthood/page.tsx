@@ -69,6 +69,14 @@ const subcategories = [
 
 const articles = [
   {
+    title: "How to Manage Stress Preparing for Parenthood",
+    excerpt: "Learn effective strategies for recognizing early signs of stress, practicing self-care, building a support network, and balancing work and relationships as you prepare for parenthood.",
+    author: "Family Edition Team",
+    date: "July 1, 2023",
+    image: "/images/How to Manage Stress Preparing for Parenthood/image1.jpg",
+    link: "/articles/Growing-family/how-to-manage-stress-preparing-for-parenthood"
+  },
+  {
     title: "Preparing Your Home for a New Baby",
     excerpt: "Essential tips for creating a safe and welcoming environment for your newborn.",
     author: "Emma Johnson",
@@ -117,14 +125,20 @@ export default function JourneyIntoParenthoodPage() {
           </div>
         </section>
 
-        {/* Featured Content Section - Moved up */}
+        {/* Featured Content Section */}
         <section className="py-16 bg-white">
           <div className="container mx-auto px-4">
-            <h2 className={`${playfair.className} text-3xl md:text-4xl font-bold mb-12 text-center text-[#0F5C5B]`}>Resources for Your Parenting Journey</h2>
+            <h2 className={`${playfair.className} text-3xl md:text-4xl font-bold mb-12 text-center text-[#0F5C5B]`}>Resources to Help You Navigate Parenthood</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {articles.map((article, index) => (
                 <div key={index} className="bg-[#FFE8D6] rounded-lg shadow-lg overflow-hidden">
-                  <Image src={article.image} alt={article.title} width={400} height={200} className="w-full h-48 object-cover" />
+                  <Image 
+                    src={article.image}
+                    alt={article.title}
+                    width={400}
+                    height={200}
+                    className="w-full h-48 object-cover"
+                  />
                   <div className="p-6">
                     <h3 className="text-xl font-bold mb-2 text-[#0F5C5B]">{article.title}</h3>
                     <p className="text-gray-600 mb-4">{article.excerpt}</p>
@@ -134,17 +148,16 @@ export default function JourneyIntoParenthoodPage() {
                       <Calendar className="mr-2 h-4 w-4" />
                       <span>{article.date}</span>
                     </div>
+                    {article.link && (
+                      <Link href={article.link} passHref>
+                        <Button className="w-full mt-4 bg-[#0F5C5B] text-white hover:bg-[#0A4342] transition-colors duration-300 rounded-full py-2 px-4">
+                          Read More
+                        </Button>
+                      </Link>
+                    )}
                   </div>
                 </div>
               ))}
-            </div>
-            <div className="text-center mt-12">
-              <Link href="/parenting-articles">
-                <Button className="bg-[#0F5C5B] text-white hover:bg-[#0A4342] px-8 py-4 rounded-full text-lg font-bold">
-                  Explore More Parenting Resources
-                  <ArrowRight className="ml-2 h-5 w-5 inline" />
-                </Button>
-              </Link>
             </div>
           </div>
         </section>
