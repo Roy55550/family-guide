@@ -2,7 +2,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight, User, Calendar, Shield, Award, ThumbsUp, Heart, Home, Users, DollarSign, Gift, Clipboard } from 'lucide-react'
 import Button from '../components/button'
-import { playfair } from '../fonts'
+import { playfair, inter } from '../fonts'
 
 const subcategories = [
   {
@@ -65,18 +65,18 @@ const articles = [
     link: "#",
   },
   {
-    title: "Creating a Wedding Budget That Works for You",
-    excerpt: "Learn how to allocate your funds wisely and plan a beautiful wedding within your means.",
-    author: "Michael Chen",
-    date: "August 2, 2023",
-    image: "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80",
-    link: "#",
+    title: "Top 8 Wedding Preparation Checklist Tips",
+    excerpt: "Start wedding planning at least 12 months early with a clear budget, and secure venues and vendors promptly for the best choices. Embrace flexibility for unexpected challenges and cherish each moment, focusing on what truly matters for a joyful celebration.",
+    author: "Family Edition Team",
+    date: "July 1, 2023",
+    image: "/images/Top 8 Wedding Preparation Checklist Tips/image4.jpg",
+    link: "/articles/getting-married/top-8-wedding-preparation-checklist-tips"
   },
 ]
 
 export default function GettingMarriedPage() {
   return (
-    <div className="min-h-screen bg-[#FFE8D6] text-gray-800 font-sans">
+    <div className={`min-h-screen bg-[#FFE8D6] text-gray-800 ${inter.className}`}>
       <header className="bg-white shadow-sm sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <Link href="/" className="flex items-center">
@@ -92,7 +92,9 @@ export default function GettingMarriedPage() {
           <nav className="hidden md:block">
             <ul className="flex space-x-6">
               <li><Link href="/" className="text-gray-600 hover:text-[#0F5C5B] transition-colors">Home</Link></li>
-              <li><Link href="#" className="text-gray-600 hover:text-[#0F5C5B] transition-colors">Articles</Link></li>
+              <li><Link href="/getting-married" className="text-gray-600 hover:text-[#0F5C5B] transition-colors">Getting Married</Link></li>
+              <li><Link href="/journey-into-parenthood" className="text-gray-600 hover:text-[#0F5C5B] transition-colors">Journey into Parenthood</Link></li>
+              <li><Link href="/separation-divorce-main" className="text-gray-600 hover:text-[#0F5C5B] transition-colors">Separation & Divorce</Link></li>
               <li><Link href="#" className="text-gray-600 hover:text-[#0F5C5B] transition-colors">About</Link></li>
               <li><Link href="#" className="text-gray-600 hover:text-[#0F5C5B] transition-colors">Contact</Link></li>
             </ul>
@@ -157,7 +159,7 @@ export default function GettingMarriedPage() {
         </section>
 
         {/* Introduction & Trust-Building Section */}
-        <section className="py-16 bg-[#FFE8D6]">
+        <section className="py-16 bg-gray-50">
           <div className="container mx-auto px-4">
             <h2 className={`${playfair.className} text-3xl md:text-4xl font-bold mb-6 text-center text-[#0F5C5B]`}>We're Here to Support Your Journey to Marriage</h2>
             <p className="text-lg text-center mb-8 max-w-3xl mx-auto">
@@ -209,7 +211,7 @@ export default function GettingMarriedPage() {
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="mb-4 md:mb-0">
               <h3 className="text-xl font-bold">Family Edition</h3>
-              <p className="text-sm">Empowering couples at every stage of their journey.</p>
+              <p className="text-sm">Empowering relationships at every stage of life.</p>
             </div>
             <nav>
               <ul className="flex space-x-4">

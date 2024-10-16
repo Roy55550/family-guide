@@ -2,7 +2,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight, User, Calendar, Shield, Award, ThumbsUp, Heart, Users, CreditCard, BookOpen, Apple, Briefcase, School, Activity, Brain } from 'lucide-react'
 import Button from '../components/button'
-import { playfair } from '../fonts'
+import { playfair, inter } from '../fonts'
 
 const subcategories = [
   {
@@ -69,6 +69,14 @@ const subcategories = [
 
 const articles = [
   {
+    title: "Preparing for Parenthood: Strengthen Your Bond",
+    excerpt: "Learn how to set realistic expectations, prioritize postnatal recovery, and build a strong co-parenting foundation as you prepare for the journey of parenthood.",
+    author: "Family Edition Team",
+    date: "July 15, 2024",
+    image: "/images/Preparing for Parenthood: Strengthen Your Bond/image1.jpg",
+    link: "/articles/Growing-family/preparing-for-parenthood-strengthen-your-bond"
+  },
+  {
     title: "How to Manage Stress Preparing for Parenthood",
     excerpt: "Learn effective strategies for recognizing early signs of stress, practicing self-care, building a support network, and balancing work and relationships as you prepare for parenthood.",
     author: "Family Edition Team",
@@ -101,9 +109,30 @@ const articles = [
 
 export default function JourneyIntoParenthoodPage() {
   return (
-    <div className="min-h-screen bg-[#FFE8D6] text-gray-800 font-sans">
+    <div className={`min-h-screen bg-[#FFE8D6] text-gray-800 ${inter.className}`}>
       <header className="bg-white shadow-sm sticky top-0 z-50">
-        {/* ... (header content remains the same) */}
+        <div className="container mx-auto px-4 py-4 flex justify-between items-center">
+          <Link href="/" className="flex items-center">
+            <Image
+              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Family Edition logo-hhpVdqQJYG4AZwBjdYf2sqDVjmSnoY.jpeg"
+              alt="Family Edition Logo"
+              width={40}
+              height={40}
+              className="mr-2"
+            />
+            <span className="text-xl md:text-3xl font-bold text-[#0F5C5B]">Family Edition</span>
+          </Link>
+          <nav className="hidden md:block">
+            <ul className="flex space-x-6">
+              <li><Link href="/" className="text-gray-600 hover:text-[#0F5C5B] transition-colors">Home</Link></li>
+              <li><Link href="/getting-married" className="text-gray-600 hover:text-[#0F5C5B] transition-colors">Getting Married</Link></li>
+              <li><Link href="/journey-into-parenthood" className="text-gray-600 hover:text-[#0F5C5B] transition-colors">Journey into Parenthood</Link></li>
+              <li><Link href="/separation-divorce-main" className="text-gray-600 hover:text-[#0F5C5B] transition-colors">Separation & Divorce</Link></li>
+              <li><Link href="#" className="text-gray-600 hover:text-[#0F5C5B] transition-colors">About</Link></li>
+              <li><Link href="#" className="text-gray-600 hover:text-[#0F5C5B] transition-colors">Contact</Link></li>
+            </ul>
+          </nav>
+        </div>
       </header>
 
       <main>
@@ -163,7 +192,7 @@ export default function JourneyIntoParenthoodPage() {
         </section>
 
         {/* Introduction & Trust-Building Section */}
-        <section className="py-16 bg-[#FFE8D6]">
+        <section className="py-16 bg-gray-50"> {/* Changed to bg-gray-50 */}
           <div className="container mx-auto px-4">
             <h2 className={`${playfair.className} text-3xl md:text-4xl font-bold mb-6 text-center text-[#0F5C5B]`}>We're Here to Support Your Parenting Journey</h2>
             <p className="text-lg text-center mb-8 max-w-3xl mx-auto">
@@ -211,7 +240,24 @@ export default function JourneyIntoParenthoodPage() {
       </main>
 
       <footer className="bg-[#0F5C5B] text-white py-8">
-        {/* ... (footer content remains the same) */}
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col md:flex-row justify-between items-center">
+            <div className="mb-4 md:mb-0">
+              <h3 className="text-xl font-bold">Family Edition</h3>
+              <p className="text-sm">Empowering relationships at every stage of life.</p>
+            </div>
+            <nav>
+              <ul className="flex space-x-4">
+                <li><Link href="#" className="hover:underline">Privacy Policy</Link></li>
+                <li><Link href="#" className="hover:underline">Terms of Service</Link></li>
+                <li><Link href="#" className="hover:underline">Contact Us</Link></li>
+              </ul>
+            </nav>
+          </div>
+          <div className="mt-8 pt-4 border-t border-gray-700 text-center text-sm">
+            &copy; 2023 Family Edition. All rights reserved.
+          </div>
+        </div>
       </footer>
     </div>
   )

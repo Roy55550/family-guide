@@ -1,10 +1,10 @@
-"use client";  // Add this line at the top of the file
+"use client";  // Keep this line at the top of the file
 
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight, User, Calendar, Shield, Award, ThumbsUp, Heart, Scale, DollarSign, Home, Users, CreditCard } from 'lucide-react'
 import Button from '../components/button'
-import { playfair } from '../fonts'
+import { playfair, inter } from '../fonts'
 import { useState } from 'react'
 
 const subcategories = [
@@ -72,12 +72,12 @@ export default function SeparationAndDivorcePage() {
   const [imageFallback, setImageFallback] = useState<string[]>([]);
 
   return (
-    <div className="min-h-screen bg-[#FFE8D6] text-gray-800 font-sans">
+    <div className={`min-h-screen bg-gray-100 text-gray-800 ${inter.className}`}>
       <header className="bg-white shadow-sm sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <Link href="/" className="flex items-center">
             <Image
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Family%20Edition%20logo-hhpVdqQJYG4AZwBjdYf2sqDVjmSnoY.jpeg"
+              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Family Edition logo-hhpVdqQJYG4AZwBjdYf2sqDVjmSnoY.jpeg"
               alt="Family Edition Logo"
               width={40}
               height={40}
@@ -88,7 +88,9 @@ export default function SeparationAndDivorcePage() {
           <nav className="hidden md:block">
             <ul className="flex space-x-6">
               <li><Link href="/" className="text-gray-600 hover:text-[#0F5C5B] transition-colors">Home</Link></li>
-              <li><Link href="#" className="text-gray-600 hover:text-[#0F5C5B] transition-colors">Articles</Link></li>
+              <li><Link href="/getting-married" className="text-gray-600 hover:text-[#0F5C5B] transition-colors">Getting Married</Link></li>
+              <li><Link href="/journey-into-parenthood" className="text-gray-600 hover:text-[#0F5C5B] transition-colors">Journey into Parenthood</Link></li>
+              <li><Link href="/separation-divorce-main" className="text-gray-600 hover:text-[#0F5C5B] transition-colors">Separation & Divorce</Link></li>
               <li><Link href="#" className="text-gray-600 hover:text-[#0F5C5B] transition-colors">About</Link></li>
               <li><Link href="#" className="text-gray-600 hover:text-[#0F5C5B] transition-colors">Contact</Link></li>
             </ul>
@@ -116,7 +118,7 @@ export default function SeparationAndDivorcePage() {
         </section>
 
         {/* Featured Content Section */}
-        <section className="py-16 bg-white">
+        <section className="py-16 bg-gray-100">
           <div className="container mx-auto px-4">
             <h2 className={`${playfair.className} text-3xl md:text-4xl font-bold mb-12 text-center text-[#0F5C5B]`}>Resources to Help You Navigate Divorce</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -169,7 +171,7 @@ export default function SeparationAndDivorcePage() {
         </section>
 
         {/* Introduction & Trust-Building Section */}
-        <section className="py-16 bg-[#FFE8D6]">
+        <section className="py-16 bg-gray-200">
           <div className="container mx-auto px-4">
             <h2 className={`${playfair.className} text-3xl md:text-4xl font-bold mb-6 text-center text-[#0F5C5B]`}>We're Here to Help at Every Stage of the Divorce Process</h2>
             <p className="text-lg text-center mb-8 max-w-3xl mx-auto">
@@ -193,7 +195,7 @@ export default function SeparationAndDivorcePage() {
         </section>
 
         {/* Subcategories Section */}
-        <section className="py-16 bg-white">
+        <section className="py-16 bg-gray-100">
           <div className="container mx-auto px-4">
             <h2 className={`${playfair.className} text-3xl md:text-4xl font-bold mb-12 text-center text-[#0F5C5B]`}>Find the Right Support for Every Aspect of Your Divorce</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
