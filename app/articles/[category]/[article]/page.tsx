@@ -1,83 +1,61 @@
-"use client";
+import ArticleContent from '../../../components/ArticleContent';
 
-import { useState } from 'react'
-import Image from 'next/image'
-import Link from 'next/link'
-import { playfair } from '../../../fonts'
-import { ArrowLeft, User, Clock, ChevronDown, ChevronUp } from 'lucide-react'
-import Button from '../../../components/button'
-
-interface FAQItem {
-  question: string
-  answer: string
+interface ArticleData {
+  title: string;
+  author: string;
+  date: string;
+  readTime: string;
+  content: string;
+  image: string;
+  faqItems: { question: string; answer: string; }[];
 }
 
-const Accordion: React.FC<{ item: FAQItem }> = ({ item }) => {
-  const [isOpen, setIsOpen] = useState(false)
-
-  return (
-    <div className="border border-gray-200 rounded-lg">
-      <button
-        className="flex justify-between items-center w-full p-4 text-left"
-        onClick={() => setIsOpen(!isOpen)}
-      >
-        <h3 className={`${playfair.className} text-xl font-bold text-[#0F5C5B]`}>{item.question}</h3>
-        {isOpen ? <ChevronUp /> : <ChevronDown />}
-      </button>
-      <div className={`accordion-content ${isOpen ? 'open' : ''}`}>
-        <div className="p-4 bg-gray-50">
-          <p>{item.answer}</p>
-        </div>
-      </div>
-    </div>
-  )
+// This function would typically fetch data from an API or database
+async function getArticleData(category: string, article: string): Promise<ArticleData> {
+  // Placeholder data - replace with actual data fetching logic
+  return {
+    title: article.replace('-', ' '),
+    author: 'John Doe',
+    date: 'June 1, 2023',
+    readTime: '5 min read',
+    content: 'This is the article content...',
+    image: '/path-to-image.jpg',
+    faqItems: [
+      { question: 'Sample Question 1', answer: 'Sample Answer 1' },
+      { question: 'Sample Question 2', answer: 'Sample Answer 2' },
+    ]
+  };
 }
 
-const ArticlePage: React.FC = () => {
-  // ... existing code ...
+export async function generateStaticParams() {
+  // This should be replaced with actual data fetching logic
+  const categories = ['getting-married', 'Growing-family', 'divorce-process-guide'];
+  const articles = {
+    'getting-married': ['top-6-reasons-to-get-marriage-counseling', 'top-8-wedding-preparation-checklist-tips'],
+    'Growing-family': ['how-to-manage-stress-preparing-for-parenthood', 'preparing-for-parenthood-strengthen-your-bond', 'essential-estate-planning-tips-for-couples-roundup'],
+    'divorce-process-guide': ['how-to-navigate-divorce-smoothly', 'top-5-co-parenting-tips', 'how-to-access-financial-help-for-divorce']
+  };
+
+  const params = [];
+  for (const category of categories) {
+    for (const article of articles[category as keyof typeof articles]) {
+      params.push({ category, article });
+    }
+  }
+
+  return params;
+}
+
+const ArticlePage = async ({ params }: { params: { category: string; article: string } }) => {
+  const articleData = await getArticleData(params.category, params.article);
 
   return (
     <div className="min-h-screen bg-gray-100">
       <div className="container mx-auto px-4 py-8">
-        <div className="max-w-3xl mx-auto">
-          <Link href="/category" className="inline-flex items-center text-[#0F5C5B] hover:underline mb-6">
-            <ArrowLeft className="mr-2" /> Back to Category
-          </Link>
-          
-          <article className="bg-white rounded-lg shadow-lg p-4 md:p-8">
-            <Image 
-              src="/path-to-image.jpg" 
-              alt="Article image"
-              width={800}
-              height={400}
-              className="rounded-lg mb-6"
-            />
-
-            <h1 className={`${playfair.className} text-3xl md:text-4xl font-bold mb-4 text-[#0F5C5B]`}>Article Title</h1>
-            
-            <div className="flex items-center text-sm text-gray-600 mb-6">
-              <User className="mr-2 h-4 w-4" />
-              <span className="mr-4">Author Name</span>
-              <Clock className="mr-2 h-4 w-4" />
-              <span className="mr-4">Date</span>
-              <span>Read Time</span>
-            </div>
-
-            {/* ... article content ... */}
-
-            <h2 className={`${playfair.className} text-2xl font-bold mb-4 text-[#0F5C5B]`}>FAQ</h2>
-            <div className="space-y-4">
-              {faqItems.map((item, index) => (
-                <Accordion key={index} item={item} />
-              ))}
-            </div>
-
-            {/* ... sources ... */}
-          </article>
-        </div>
+        <ArticleContent articleData={articleData} category={params.category} />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ArticlePage
+export default ArticlePage;
