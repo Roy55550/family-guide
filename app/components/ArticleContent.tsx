@@ -49,7 +49,7 @@ const ArticleContent: React.FC<{ articleData: ArticleData; category: string }> =
         <ArrowLeft className="mr-2" /> Back to {category.replace('-', ' ')}
       </Link>
       
-      <article className="bg-white rounded-lg shadow-lg p-4 md:p-8">
+      <article className="bg-white rounded-lg shadow-lg p-8">
         <Image 
           src={articleData.image}
           alt={articleData.title}

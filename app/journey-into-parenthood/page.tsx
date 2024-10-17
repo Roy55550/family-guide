@@ -91,31 +91,7 @@ const articles = [
     date: "July 15, 2023",
     image: "/images/Essential Estate Planning Tips for Couples Roundup/image1.jpg",
     link: "/articles/Growing-family/essential-estate-planning-tips-for-couples-roundup"
-  },
-  {
-    title: "Preparing Your Home for a New Baby",
-    excerpt: "Essential tips for creating a safe and welcoming environment for your newborn.",
-    author: "Emma Johnson",
-    date: "July 15, 2023",
-    image: "https://images.unsplash.com/photo-1586015555751-63bb77f4322a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80",
-    link: "/articles/Growing-family/preparing-your-home-for-a-new-baby"
-  },
-  {
-    title: "Navigating the First Year of Parenthood",
-    excerpt: "A comprehensive guide to surviving and thriving in your first year as new parents.",
-    author: "Dr. Michael Chen",
-    date: "August 2, 2023",
-    image: "https://images.unsplash.com/photo-1561043433-aaf687c4cf04?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80",
-    link: "/articles/Growing-family/navigating-the-first-year-of-parenthood"
-  },
-  {
-    title: "Balancing Work and Family: Tips for New Parents",
-    excerpt: "Practical advice for managing your career while raising a young family.",
-    author: "Sarah Thompson",
-    date: "August 10, 2023",
-    image: "https://images.unsplash.com/photo-1531983412531-1f49a365ffed?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80",
-    link: "/articles/Growing-family/balancing-work-and-family-tips-for-new-parents"
-  },
+  }
 ]
 
 export default function JourneyIntoParenthoodPage() {
@@ -155,10 +131,13 @@ export default function JourneyIntoParenthoodPage() {
               <p className="text-xl mb-8">Find support and resources for every stage of your parenting journey.</p>
               <Link href="/parenting-quiz">
                 <Button 
-                  className="bg-white text-[#0F5C5B] hover:bg-gray-100 hover:text-[#0A4342] px-8 py-4 rounded-full text-lg font-bold"
+                  className="px-8 py-4 text-lg font-bold"
+                  variant="ghost"
                 >
-                  Start Your Parenting Journey Quiz
-                  <ArrowRight className="ml-2 h-5 w-5 inline" />
+                  <span className="flex items-center">
+                    Start Your Parenting Journey Quiz
+                    <ArrowRight className="ml-2 h-5 w-5" />
+                  </span>
                 </Button>
               </Link>
             </div>

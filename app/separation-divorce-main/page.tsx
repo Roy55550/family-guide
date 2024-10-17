@@ -107,7 +107,8 @@ export default function SeparationAndDivorcePage() {
               <p className="text-xl mb-8">Find the right professionals for legal, financial, and emotional support, customized to your unique situation.</p>
               <Link href="/separation-divorce">
                 <Button 
-                  className="bg-white text-[#0F5C5B] hover:bg-gray-100 hover:text-[#0A4342] px-8 py-4 rounded-full text-lg font-bold"
+                  className="bg-white text-[#0F5C5B] hover:bg-gray-100 hover:text-[#0A4342] px-8 py-4 rounded-full text-lg font-bold transform hover:scale-105 transition-all duration-300"
+                  variant="ghost"
                 >
                   Start Your Divorce Support Quiz
                   <ArrowRight className="ml-2 h-5 w-5 inline" />

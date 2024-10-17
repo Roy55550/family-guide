@@ -112,6 +112,7 @@ export default function GettingMarriedPage() {
               <Link href="/wedding-planning-quiz">
                 <Button 
                   className="bg-white text-[#0F5C5B] hover:bg-gray-100 hover:text-[#0A4342] px-8 py-4 rounded-full text-lg font-bold"
+                  variant="ghost"
                 >
                   Start Your Wedding Planning Quiz
                   <ArrowRight className="ml-2 h-5 w-5 inline" />
