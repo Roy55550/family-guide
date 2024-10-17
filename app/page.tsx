@@ -7,6 +7,8 @@ import { motion } from 'framer-motion'
 import Button from "./components/button"
 import { ArrowRight, Heart, Users, Scale, Shield, Award, ThumbsUp } from 'lucide-react'
 import { playfair, inter } from './fonts'
+import Navigation from './components/Navigation'
+import BottomNavigation from './components/BottomNavigation'
 
 const categories = [
   {
@@ -61,38 +63,8 @@ const articles = [
 
 export default function Home() {
   return (
-    <div className={`min-h-screen bg-gray-100 text-gray-800 ${inter.className}`}>
-      <header className="bg-white shadow-sm sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <Link href="/" className="flex items-center">
-            <Image
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Family Edition logo-hhpVdqQJYG4AZwBjdYf2sqDVjmSnoY.jpeg"
-              alt="Family Edition Logo"
-              width={40}
-              height={40}
-              className="mr-2"
-            />
-            <span className="text-xl md:text-3xl font-bold text-[#0F5C5B]">Family Edition</span>
-          </Link>
-          <nav className="hidden md:block">
-            <ul className="flex space-x-6">
-              {categories.map((category, index) => (
-                <li key={index}>
-                  <Link 
-                    href={category.link}
-                    className="text-gray-600 hover:text-[#0F5C5B] transition-colors"
-                  >
-                    {category.title}
-                  </Link>
-                </li>
-              ))}
-              <li><Link href="#" className="text-gray-600 hover:text-[#0F5C5B] transition-colors">About</Link></li>
-              <li><Link href="#" className="text-gray-600 hover:text-[#0F5C5B] transition-colors">Contact</Link></li>
-            </ul>
-          </nav>
-        </div>
-      </header>
-
+    <div className="min-h-screen bg-gray-100">
+      <Navigation />
       <main>
         {/* Hero Section */}
         <section className="bg-[#0F5C5B] text-white py-16 md:py-24">
@@ -225,27 +197,7 @@ export default function Home() {
           </div>
         </section>
       </main>
-
-      <footer className="bg-[#0F5C5B] text-white py-8">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="mb-4 md:mb-0">
-              <h3 className="text-xl font-bold">Family Edition</h3>
-              <p className="text-sm">Empowering relationships at every stage of life.</p>
-            </div>
-            <nav>
-              <ul className="flex space-x-4">
-                <li><Link href="#" className="hover:underline">Privacy Policy</Link></li>
-                <li><Link href="#" className="hover:underline">Terms of Service</Link></li>
-                <li><Link href="#" className="hover:underline">Contact Us</Link></li>
-              </ul>
-            </nav>
-          </div>
-          <div className="mt-8 pt-4 border-t border-gray-700 text-center text-sm">
-            &copy; 2023 Family Edition. All rights reserved.
-          </div>
-        </div>
-      </footer>
+      <BottomNavigation />
     </div>
   )
 }

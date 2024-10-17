@@ -85,11 +85,20 @@ const articles = [
     link: "/articles/Growing-family/how-to-manage-stress-preparing-for-parenthood"
   },
   {
+    title: "Essential Estate Planning Tips for Couples Roundup",
+    excerpt: "Open discussions about estate planning, including creating and updating wills, are key for couples to secure their future, providing a clear plan for asset distribution and guardianship. Additionally, continuously updating beneficiary designations and establishing trusts can protect assets and ensure alignment with personal wishes.",
+    author: "Family Edition Team",
+    date: "July 15, 2023",
+    image: "/images/Essential Estate Planning Tips for Couples Roundup/image1.jpg",
+    link: "/articles/Growing-family/essential-estate-planning-tips-for-couples-roundup"
+  },
+  {
     title: "Preparing Your Home for a New Baby",
     excerpt: "Essential tips for creating a safe and welcoming environment for your newborn.",
     author: "Emma Johnson",
     date: "July 15, 2023",
     image: "https://images.unsplash.com/photo-1586015555751-63bb77f4322a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80",
+    link: "/articles/Growing-family/preparing-your-home-for-a-new-baby"
   },
   {
     title: "Navigating the First Year of Parenthood",
@@ -97,6 +106,7 @@ const articles = [
     author: "Dr. Michael Chen",
     date: "August 2, 2023",
     image: "https://images.unsplash.com/photo-1561043433-aaf687c4cf04?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80",
+    link: "/articles/Growing-family/navigating-the-first-year-of-parenthood"
   },
   {
     title: "Balancing Work and Family: Tips for New Parents",
@@ -104,6 +114,7 @@ const articles = [
     author: "Sarah Thompson",
     date: "August 10, 2023",
     image: "https://images.unsplash.com/photo-1531983412531-1f49a365ffed?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80",
+    link: "/articles/Growing-family/balancing-work-and-family-tips-for-new-parents"
   },
 ]
 
@@ -177,13 +188,11 @@ export default function JourneyIntoParenthoodPage() {
                       <Calendar className="mr-2 h-4 w-4" />
                       <span>{article.date}</span>
                     </div>
-                    {article.link && (
-                      <Link href={article.link} passHref>
-                        <Button className="w-full mt-4 bg-[#0F5C5B] text-white hover:bg-[#0A4342] transition-colors duration-300 rounded-full py-2 px-4">
-                          Read More
-                        </Button>
-                      </Link>
-                    )}
+                    <Link href={article.link} passHref>
+                      <Button className="w-full mt-4 bg-[#0F5C5B] text-white hover:bg-[#0A4342] transition-colors duration-300 rounded-full py-2 px-4">
+                        Read More
+                      </Button>
+                    </Link>
                   </div>
                 </div>
               ))}
