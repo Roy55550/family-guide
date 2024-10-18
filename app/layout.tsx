@@ -7,6 +7,7 @@ const inter = Inter({ subsets: ['latin'] });
 export const metadata: Metadata = {
   title: "Family Edition",
   description: "Empowering relationships at every stage of life",
+  robots: "noindex, nofollow"
 };
 
 export default function RootLayout({
@@ -16,6 +17,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <meta name="robots" content="noindex, nofollow" />
+      </head>
       <body className={inter.className}>{children}</body>
     </html>
   );
