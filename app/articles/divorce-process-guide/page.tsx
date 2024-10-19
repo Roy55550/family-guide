@@ -69,49 +69,22 @@ const DivorceProcessGuidePage: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 text-gray-800 font-sans">
-      <header className="bg-white shadow-sm sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <Link href="/" className="flex items-center">
-            <Image
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Family%20Edition%20logo-hhpVdqQJYG4AZwBjdYf2sqDVjmSnoY.jpeg"
-              alt="Family Edition Logo"
-              width={40}
-              height={40}
-              className="mr-2"
-            />
-            <span className="text-xl md:text-3xl font-bold text-[#0F5C5B]">Family Edition</span>
-          </Link>
-          <nav className="hidden md:block">
-            <ul className="flex space-x-6">
-              <li><Link href="/" className="text-gray-600 hover:text-[#0F5C5B] transition-colors">Home</Link></li>
-              <li><Link href="/articles" className="text-gray-600 hover:text-[#0F5C5B] transition-colors">Articles</Link></li>
-              <li><Link href="#" className="text-gray-600 hover:text-[#0F5C5B] transition-colors">About</Link></li>
-              <li><Link href="#" className="text-gray-600 hover:text-[#0F5C5B] transition-colors">Contact</Link></li>
-            </ul>
-          </nav>
-        </div>
-      </header>
-
+    <div className="min-h-screen bg-gray-50">
       <main className="container mx-auto px-4 py-8 md:py-12">
-        <Link href="/articles">
-          <Button
-            variant="ghost"
-            className="mb-6 text-[#0F5C5B] hover:text-[#0A4342]"
-          >
-            <ArrowLeft className="mr-2 h-4 w-4" />
-            Back to Articles
-          </Button>
-        </Link>
-
-        <article className="max-w-3xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
-          <Image
-            src={post.heroImage}
-            alt={post.title}
-            width={1200}
-            height={600}
-            className="w-full h-64 md:h-96 object-cover"
+        <div className="relative">
+          <Link href="/separation-divorce-main" className="absolute top-0 left-0 inline-flex items-center text-[#0F5C5B] hover:underline mb-6">
+            <ArrowLeft className="mr-2" /> Back
+          </Link>
+          <Image 
+            src="/images/divorce-process-guide/header-image.jpg" 
+            alt="Divorce process guide header image"
+            width={800}
+            height={400}
+            className="rounded-lg"
           />
+        </div>
+
+        <article className="bg-white rounded-lg shadow-lg p-8">
           <div className="p-6 md:p-8">
             <h1 className="text-3xl md:text-4xl font-bold text-[#0F5C5B] mb-4">{post.title}</h1>
             <div className="flex flex-wrap items-center text-sm text-gray-600 mb-6">

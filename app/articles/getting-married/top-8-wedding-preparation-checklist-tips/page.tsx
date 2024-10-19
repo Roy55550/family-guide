@@ -82,7 +82,7 @@ const Top8WeddingPreparationChecklistTipsArticle: React.FC = () => {
       <div className="container mx-auto px-4 py-8">
         <div className="max-w-3xl mx-auto">
           <Link href="/getting-married" className="inline-flex items-center text-[#0F5C5B] hover:underline mb-6">
-            <ArrowLeft className="mr-2" /> Back to Getting Married
+            <ArrowLeft className="mr-2" /> Back
           </Link>
           
           <article className="bg-white rounded-lg shadow-lg p-8">
