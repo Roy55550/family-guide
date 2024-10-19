@@ -49,7 +49,7 @@ const articles = [
     author: "Family Edition Team",
     date: "July 15, 2023",
     image: "/images/Preparing for Parenthood: Strengthen Your Bond/image1.jpg",
-    link: "/articles/growing-family/preparing-for-parenthood-strengthen-your-bond",
+    link: "/articles/journey-into-parenthood/preparing-for-parenthood-strengthen-your-bond",
   },
   {
     title: "Top 5 Co-Parenting Tips",

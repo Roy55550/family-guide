@@ -32,7 +32,7 @@ const subcategories = [
   },
   {
     title: "Financial Planning",
-    description: "Get advice on budgeting and financial planning for your growing family.",
+    description: "Get advice on budgeting and financial planning for your Growing family.",
     icon: CreditCard,
   },
 ]
@@ -61,7 +61,7 @@ const articles = [
   },
 ]
 
-export default function growingYourFamilyPage() {
+export default function GrowingYourFamilyPage() {
   return (
     <div className="min-h-screen bg-[#FFE8D6] text-gray-800 font-sans">
       <header className="bg-white shadow-sm sticky top-0 z-50">
@@ -92,7 +92,7 @@ export default function growingYourFamilyPage() {
         <section className="bg-[#0F5C5B] text-white py-16 md:py-24">
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto text-center">
-              <h1 className={`${playfair.className} text-4xl md:text-5xl font-bold mb-6`}>Expert Guidance for growing Your Family</h1>
+              <h1 className={`${playfair.className} text-4xl md:text-5xl font-bold mb-6`}>Expert Guidance for Growing Your Family</h1>
               <p className="text-xl mb-8">Find support and resources for every stage of your family-building journey.</p>
               <Link href="/family-planning-quiz">
                 <Button 
@@ -111,7 +111,7 @@ export default function growingYourFamilyPage() {
           <div className="container mx-auto px-4">
             <h2 className={`${playfair.className} text-3xl md:text-4xl font-bold mb-6 text-center text-[#0F5C5B]`}>We're Here to Support Your Family-Building Journey</h2>
             <p className="text-lg text-center mb-8 max-w-3xl mx-auto">
-              growing your family is an exciting and complex journey. We're here to guide you every step of the way, connecting you with trusted professionals and resources.
+              Growing your family is an exciting and complex journey. We're here to guide you every step of the way, connecting you with trusted professionals and resources.
             </p>
             <div className="flex justify-center space-x-8 mb-8">
               <div className="flex flex-col items-center">
@@ -156,7 +156,7 @@ export default function growingYourFamilyPage() {
         {/* Featured Content Section */}
         <section className="py-16 bg-white">
           <div className="container mx-auto px-4">
-            <h2 className={`${playfair.className} text-3xl md:text-4xl font-bold mb-12 text-center text-[#0F5C5B]`}>Resources for growing Your Family</h2>
+            <h2 className={`${playfair.className} text-3xl md:text-4xl font-bold mb-12 text-center text-[#0F5C5B]`}>Resources for Growing Your Family</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {articles.map((article, index) => (
                 <div key={index} className="bg-[#FFE8D6] rounded-lg shadow-lg overflow-hidden">

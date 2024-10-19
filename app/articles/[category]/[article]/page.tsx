@@ -17,7 +17,7 @@ async function getArticleData(category: string, article: string): Promise<Articl
   // Placeholder data - replace with actual data fetching logic
   const articles = {
     'getting-married': ['top-6-reasons-to-get-marriage-counseling', 'top-8-wedding-preparation-checklist-tips'],
-    'Growing-family': ['how-to-manage-stress-preparing-for-parenthood', 'preparing-for-parenthood-strengthen-your-bond', 'essential-estate-planning-tips-for-couples-roundup'],
+    'journey-into-parenthood': ['how-to-manage-stress-preparing-for-parenthood', 'preparing-for-parenthood-strengthen-your-bond', 'essential-estate-planning-tips-for-couples-roundup'],
     'divorce-process-guide': ['how-to-navigate-divorce-smoothly', 'top-5-co-parenting-tips', 'how-to-access-financial-help-for-divorce']
   };
 
@@ -40,10 +40,10 @@ async function getArticleData(category: string, article: string): Promise<Articl
 }
 
 export async function generateStaticParams() {
-  const categories = ['getting-married', 'Growing-family', 'divorce-process-guide'];
+  const categories = ['getting-married', 'journey-into-parenthood', 'divorce-process-guide'];
   const articles = {
     'getting-married': ['top-6-reasons-to-get-marriage-counseling', 'top-8-wedding-preparation-checklist-tips'],
-    'Growing-family': ['how-to-manage-stress-preparing-for-parenthood', 'preparing-for-parenthood-strengthen-your-bond', 'essential-estate-planning-tips-for-couples-roundup'],
+    'journey-into-parenthood': ['how-to-manage-stress-preparing-for-parenthood', 'preparing-for-parenthood-strengthen-your-bond', 'essential-estate-planning-tips-for-couples-roundup'],
     'divorce-process-guide': ['how-to-navigate-divorce-smoothly', 'top-5-co-parenting-tips', 'how-to-access-financial-help-for-divorce']
   };
 
