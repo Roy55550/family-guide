@@ -74,7 +74,7 @@ const articles = [
     author: "Family Edition Team",
     date: "July 15, 2024",
     image: "/images/Preparing for Parenthood: Strengthen Your Bond/image1.jpg",
-    link: "/articles/Growing-family/preparing-for-parenthood-strengthen-your-bond"
+    link: "/articles/growing-family/preparing-for-parenthood-strengthen-your-bond"
   },
   {
     title: "How to Manage Stress Preparing for Parenthood",
@@ -82,7 +82,7 @@ const articles = [
     author: "Family Edition Team",
     date: "July 1, 2023",
     image: "/images/How to Manage Stress Preparing for Parenthood/image1.jpg",
-    link: "/articles/Growing-family/how-to-manage-stress-preparing-for-parenthood"
+    link: "/articles/growing-family/how-to-manage-stress-preparing-for-parenthood"
   },
   {
     title: "Essential Estate Planning Tips for Couples Roundup",
@@ -90,7 +90,7 @@ const articles = [
     author: "Family Edition Team",
     date: "July 15, 2023",
     image: "/images/Essential Estate Planning Tips for Couples Roundup/image1.jpg",
-    link: "/articles/Growing-family/essential-estate-planning-tips-for-couples-roundup"
+    link: "/articles/growing-family/essential-estate-planning-tips-for-couples-roundup"
   }
 ]
 
