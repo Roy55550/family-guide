@@ -2,6 +2,12 @@
 import { Metadata } from 'next';
 import ArticleContent from '../../../components/ArticleContent';
 import { notFound } from 'next/navigation';
+import HowToAccessFinancialHelpForDivorce from '../../divorce-process-guide/how-to-access-financial-help-for-divorce/page';
+import HowToStreamlineDivorceProcess from '../../divorce-process-guide/how-to-streamline-the-divorce-process/page';
+import Top6ReasonsToGetMarriageCounseling from '../../getting-married/top-6-reasons-to-get-marriage-counseling/page';
+import JointAccounts from '../../getting-married/joint-accounts/page';
+import Top5CoParentingTips from '../../divorce-process-guide/top-5-co-parenting-tips';
+import EssentialEstatePlanningTipsForCouplesRoundup from '../../journey-into-parenthood/essential-estate-planning-tips-for-couples-roundup/page';
 
 // Define the structure of the article data
 interface ArticleData {
@@ -20,7 +26,7 @@ async function getArticleData(category: string, article: string): Promise<Articl
   const articles = {
     'getting-married': ['top-6-reasons-to-get-marriage-counseling', 'top-8-wedding-preparation-checklist-tips', 'joint-accounts'],
     'journey-into-parenthood': ['how-to-manage-stress-preparing-for-parenthood', 'preparing-for-parenthood-strengthen-your-bond', 'essential-estate-planning-tips-for-couples-roundup'],
-    'divorce-process-guide': ['how-to-navigate-divorce-smoothly', 'top-5-co-parenting-tips', 'how-to-access-financial-help-for-divorce']
+    'divorce-process-guide': ['how-to-navigate-divorce-smoothly', 'top-5-co-parenting-tips', 'how-to-access-financial-help-for-divorce', 'how-to-streamline-the-divorce-process']
   };
 
   // Check if the article exists in the specified category
@@ -45,22 +51,14 @@ async function getArticleData(category: string, article: string): Promise<Articl
 
 // Function to generate static parameters for the articles
 export async function generateStaticParams() {
-  const categories = ['getting-married', 'journey-into-parenthood', 'divorce-process-guide'];
-  const articles = {
-    'getting-married': ['top-6-reasons-to-get-marriage-counseling', 'top-8-wedding-preparation-checklist-tips', 'joint-accounts'],
-    'journey-into-parenthood': ['how-to-manage-stress-preparing-for-parenthood', 'preparing-for-parenthood-strengthen-your-bond', 'essential-estate-planning-tips-for-couples-roundup'],
-    'divorce-process-guide': ['how-to-navigate-divorce-smoothly', 'top-5-co-parenting-tips', 'how-to-access-financial-help-for-divorce']
-  };
-
-  // Create an array of parameters for each article in each category
-  const params = [];
-  for (const category of categories) {
-    for (const article of articles[category as keyof typeof articles]) {
-      params.push({ category, article });
-    }
-  }
-
-  return params;
+  return [
+    { category: 'divorce-process-guide', article: 'how-to-access-financial-help-for-divorce' },
+    { category: 'divorce-process-guide', article: 'how-to-streamline-the-divorce-process' },
+    { category: 'getting-married', article: 'top-6-reasons-to-get-marriage-counseling' },
+    { category: 'getting-married', article: 'joint-accounts' },
+    { category: 'divorce-process-guide', article: 'top-5-co-parenting-tips' },
+    { category: 'journey-into-parenthood', article: 'essential-estate-planning-tips-for-couples-roundup' },
+  ];
 }
 
 // Function to generate metadata for the article page
@@ -78,20 +76,23 @@ export async function generateMetadata({ params }: { params: { category: string;
 }
 
 // Main component to render the article page
-export default async function ArticlePage({ params }: { params: { category: string; article: string } }) {
-  const articleData = await getArticleData(params.category, params.article);
+export default function Article({ params }: { params: { category: string; article: string } }) {
+  const { category, article } = params;
 
-  // If the article is not found, show a 404 page
-  if (!articleData) {
-    notFound();
+  switch (`${category}/${article}`) {
+    case 'divorce-process-guide/how-to-access-financial-help-for-divorce':
+      return <HowToAccessFinancialHelpForDivorce />;
+    case 'divorce-process-guide/how-to-streamline-the-divorce-process':
+      return <HowToStreamlineDivorceProcess />;
+    case 'getting-married/top-6-reasons-to-get-marriage-counseling':
+      return <Top6ReasonsToGetMarriageCounseling />;
+    case 'getting-married/joint-accounts':
+      return <JointAccounts />;
+    case 'divorce-process-guide/top-5-co-parenting-tips':
+      return <Top5CoParentingTips />;
+    case 'journey-into-parenthood/essential-estate-planning-tips-for-couples-roundup':
+      return <EssentialEstatePlanningTipsForCouplesRoundup />;
+    default:
+      notFound();
   }
-
-  // Render the article content
-  return (
-    <div className="min-h-screen bg-gray-100">
-      <div className="container mx-auto px-4 py-8">
-        <ArticleContent articleData={articleData} category={params.category} />
-      </div>
-    </div>
-  );
 }
