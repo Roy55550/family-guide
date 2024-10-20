@@ -1,3 +1,5 @@
+"use client";
+
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight, User, Calendar, Shield, Award, ThumbsUp, Heart, Home, Users, DollarSign, Gift, Clipboard } from 'lucide-react'
@@ -56,14 +58,7 @@ const articles = [
     image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80",
     link: "/articles/getting-married/top-6-reasons-to-get-marriage-counseling",
   },
-  {
-    title: "10 Tips for Choosing Your Perfect Wedding Venue",
-    excerpt: "Discover key factors to consider when selecting the ideal location for your special day.",
-    author: "Emma Johnson",
-    date: "July 15, 2023",
-    image: "https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80",
-    link: "#",
-  },
+  
   {
     title: "Top 8 Wedding Preparation Checklist Tips",
     excerpt: "Start wedding planning at least 12 months early with a clear budget, and secure venues and vendors promptly for the best choices. Embrace flexibility for unexpected challenges and cherish each moment, focusing on what truly matters for a joyful celebration.",
@@ -72,6 +67,14 @@ const articles = [
     image: "/images/Top 8 Wedding Preparation Checklist Tips/image4.jpg",
     link: "/articles/getting-married/top-8-wedding-preparation-checklist-tips"
   },
+  {
+    title: "Joint vs Separate Accounts: Comprehensive Review",
+    excerpt: "Explore the pros and cons of joint and separate accounts for couples. Understand how these financial decisions can impact your relationship and communication.",
+    author: "Family Edition Team",
+    date: "October 10, 2024",
+    image: "/images/joint-accounts/image1.jpg",
+    link: "/articles/getting-married/joint-accounts"
+  }
 ]
 
 export default function GettingMarriedPage() {
@@ -91,12 +94,26 @@ export default function GettingMarriedPage() {
           </Link>
           <nav className="hidden md:block">
             <ul className="flex space-x-6">
-              <li><Link href="/" className="text-gray-600 hover:text-[#0F5C5B] transition-colors">Home</Link></li>
-              <li><Link href="/getting-married" className="text-gray-600 hover:text-[#0F5C5B] transition-colors">Getting Married</Link></li>
-              <li><Link href="/journey-into-parenthood" className="text-gray-600 hover:text-[#0F5C5B] transition-colors">Journey into Parenthood</Link></li>
-              <li><Link href="/separation-divorce-main" className="text-gray-600 hover:text-[#0F5C5B] transition-colors">Separation & Divorce</Link></li>
-              <li><Link href="#" className="text-gray-600 hover:text-[#0F5C5B] transition-colors">About</Link></li>
-              <li><Link href="#" className="text-gray-600 hover:text-[#0F5C5B] transition-colors">Contact</Link></li>
+              <li>
+                <Link href="/" className="text-gray-600 hover:text-[#0F5C5B] transition-colors">Home</Link>
+              </li>
+              <li>
+                <Link href="/getting-married" className="text-gray-600 hover:text-[#0F5C5B] transition-colors border-b-4" style={{ borderColor: 'rgba(10, 67, 66, 0.7)' }}>
+                  Getting Married
+                </Link>
+              </li>
+              <li>
+                <Link href="/journey-into-parenthood" className="text-gray-600 hover:text-[#0F5C5B] transition-colors">Journey into Parenthood</Link>
+              </li>
+              <li>
+                <Link href="/separation-divorce-main" className="text-gray-600 hover:text-[#0F5C5B] transition-colors">Separation & Divorce</Link>
+              </li>
+              <li>
+                <Link href="#" className="text-gray-600 hover:text-[#0F5C5B] transition-colors">About</Link>
+              </li>
+              <li>
+                <Link href="#" className="text-gray-600 hover:text-[#0F5C5B] transition-colors">Contact</Link>
+              </li>
             </ul>
           </nav>
         </div>
