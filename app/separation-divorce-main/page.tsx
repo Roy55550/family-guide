@@ -74,18 +74,11 @@ export default function SeparationAndDivorcePage() {
   return (
     <div className={`min-h-screen bg-gray-100 text-gray-800 ${inter.className}`}>
       <header className="bg-white shadow-sm sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-4 flex justify-between items-center">
+        <div className="container mx-auto px-4 py-4 flex justify-start items-center"> {/* Use justify-start */}
           <Link href="/" className="flex items-center">
-            <Image
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Family Edition logo-hhpVdqQJYG4AZwBjdYf2sqDVjmSnoY.jpeg"
-              alt="Family Edition Logo"
-              width={40}
-              height={40}
-              className="mr-2"
-            />
             <span className="text-xl md:text-3xl font-bold text-[#0F5C5B]">Family Edition</span>
           </Link>
-          <nav className="hidden md:block">
+          <nav className="hidden md:block ml-auto"> {/* Added ml-auto for spacing */}
             <ul className="flex space-x-6">
               <li><Link href="/" className="text-gray-600 hover:text-[#0F5C5B] transition-colors">Home</Link></li>
               <li><Link href="/getting-married" className="text-gray-600 hover:text-[#0F5C5B] transition-colors">Getting Married</Link></li>
